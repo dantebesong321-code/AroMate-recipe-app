@@ -20,7 +20,6 @@ function EditRecipe() {
     try {
       const response = await axios.get(
         `http://localhost:5008/recipes/${recipeId}`,
-        body,
       );
       console.log(response.data);
       setTitle(response.data.title);
@@ -32,6 +31,13 @@ function EditRecipe() {
       console.log(error);
     }
   };
+
+  const handleTitle = (e) => setTitle(e.target.value);
+  const handleImage = (e) => setImage(e.target.value);
+  const handleDescription = (e) => setDescription(e.target.value);
+  const handleDifficulty = (e) => setDifficulty(e.target.value);
+  const handleCookingTime = (e) => setCookingTime(e.target.value);
+  const handleSteps = (e) => setSteps(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +52,10 @@ function EditRecipe() {
     };
 
     try {
-      const response = await axios.post("http://localhost:5008/recipes", body);
+      const response = await axios.put(
+        "http://localhost:5008/recipes/:recipeId?_expand",
+        body,
+      );
       navigate("/recipes");
     } catch (error) {
       console.log(error);
@@ -66,7 +75,7 @@ function EditRecipe() {
 
   return (
     <div className="create-recipe">
-      <h3>Create recipe</h3>
+      <h3>Edit recipe</h3>
 
       <form onSubmit={handleSubmit}>
         <div className="form-element">

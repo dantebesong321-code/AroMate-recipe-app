@@ -80,6 +80,10 @@ function RecipeDetail() {
           <button>Back</button>
         </Link>
 
+        <Link to={`/recipes/edit/${recipe.id}`}>
+          <button>Edit</button>
+        </Link>
+
         <button onClick={deleteRecipe}>Delete </button>
       </div>
     </div>
