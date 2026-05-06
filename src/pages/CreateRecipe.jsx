@@ -121,7 +121,9 @@ function CreateRecipe() {
         <br />
         <div className="form-btns">
           <button type="submit">Add recipe</button>
-          <button onClick={deleteRecipe}>Delete </button>
+          <button className="main-delete-btn" onClick={deleteRecipe}>
+            Delete{" "}
+          </button>
         </div>
       </form>
     </div>

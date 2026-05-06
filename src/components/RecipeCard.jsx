@@ -3,19 +3,23 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 function RecipeCard({ recipe }) {
+  const cardStyle = {};
+
   return (
-    <div>
+    <div className="card">
       <Card
         className="recipe-card"
         style={{
           width: "15rem",
-          height: "350px",
+          height: "250px",
           padding: "12px",
           backgroundColor: "#ffffff",
           display: "flex",
           flexDirection: "column",
           borderRadius: "16px",
           textAlign: "left",
+          boxShadow:
+            "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1",
         }}
       >
         <div style={{ height: "180px", overflow: "hidden" }}>
@@ -35,6 +39,7 @@ function RecipeCard({ recipe }) {
           style={{
             display: "flex",
             flexDirection: "column",
+            marginTop: "8px",
             justifyContent: "space-evenly",
             flexGrow: 1,
           }}
@@ -48,7 +53,7 @@ function RecipeCard({ recipe }) {
           >
             {recipe.title}
           </Card.Title>
-          <Card.Text style={{ fontSize: "16px" }}>
+          <Card.Text style={{ fontSize: "14px" }}>
             {recipe.description}
           </Card.Text>{" "}
           <br />

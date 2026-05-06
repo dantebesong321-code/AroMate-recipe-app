@@ -8,6 +8,7 @@ import EditRecipe from "./EditRecipe";
 function RecipeDetail() {
   const [recipe, setRecipe] = useState(null);
   const { recipeId } = useParams();
+  const naivgate = useNavigate();
 
   useEffect(() => {
     getData();
@@ -48,16 +49,11 @@ function RecipeDetail() {
     <div className="recipeDetailsPage">
       <div key={recipeId}>
         <h3>{recipe.title}</h3>
-        <img
-          src={recipe.image}
-          alt="recipe Image"
-          height="300px"
-          width="auto"
-        />
+        <img src={recipe.image} alt="recipe" className="recipe-image" />
         <br />
         <h4>Description</h4>
         <p>{recipe.description}</p>
-        <br />
+        <br /> <hr />
         <div
           className="taps-icon"
           style={{
@@ -71,10 +67,27 @@ function RecipeDetail() {
           <p> Dificulty:{recipe.difficulty}</p>
           <p>Cooking Time: {recipe.cookingTime} min</p>
         </div>
-        <br />
+        <hr />
         <h4>Steps</h4>
-        <p>{recipe.steps}</p>
+        <ul className="recipe-list">
+          {Array.isArray(recipe.steps) ? (
+            recipe.steps.map((step, index) => <li key={index}>{step}</li>)
+          ) : (
+            <li>{recipe.steps}</li>
+          )}
+        </ul>
+        <h4>Ingredients</h4>
+        <ul className="recipe-list">
+          {Array.isArray(recipe.ingredients) ? (
+            recipe.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))
+          ) : (
+            <li>{recipe.ingredients}</li>
+          )}
+        </ul>
       </div>
+
       <div className="form-btns">
         <Link to="/recipes">
           <button>Back</button>
@@ -84,7 +97,9 @@ function RecipeDetail() {
           <button>Edit</button>
         </Link>
 
-        <button onClick={deleteRecipe}>Delete </button>
+        <button className="main-delete-btn" onClick={deleteRecipe}>
+          Delete{" "}
+        </button>
       </div>
     </div>
   );

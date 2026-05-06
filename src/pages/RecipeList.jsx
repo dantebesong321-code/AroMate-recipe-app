@@ -22,7 +22,7 @@ function RecipeList() {
     }
   };
 
-  if (!allRecipes.length === 0) {
+  if (allRecipes.length === 0) {
     return (
       <Spinner animation="border" role="status">
         <span className="visually-hidden">Loading...</span>

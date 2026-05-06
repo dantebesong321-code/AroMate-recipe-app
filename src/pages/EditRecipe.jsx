@@ -11,6 +11,7 @@ function EditRecipe() {
   const [difficulty, setDifficulty] = useState("");
   const [cookingTime, setCookingTime] = useState("");
   const [steps, setSteps] = useState("");
+  const [ingredients, setIngredients] = useState("");
 
   useEffect(() => {
     getData();
@@ -26,7 +27,9 @@ function EditRecipe() {
       setImage(response.data.image);
       setDescription(response.data.description);
       setDifficulty(response.data.difficulty);
+      setCookingTime(response.data.cookingTime);
       setSteps(response.data.steps);
+      setIngredients(response.data.ingredients);
     } catch (error) {
       console.log(error);
     }
@@ -38,6 +41,7 @@ function EditRecipe() {
   const handleDifficulty = (e) => setDifficulty(e.target.value);
   const handleCookingTime = (e) => setCookingTime(e.target.value);
   const handleSteps = (e) => setSteps(e.target.value);
+  const handleIngredients = (e) => setIngredients(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,11 +53,12 @@ function EditRecipe() {
       difficulty,
       cookingTime,
       steps,
+      ingredients,
     };
 
     try {
       const response = await axios.put(
-        "http://localhost:5008/recipes/:recipeId?_expand",
+        `http://localhost:5008/recipes/${recipeId}`,
         body,
       );
       navigate("/recipes");
@@ -93,7 +98,7 @@ function EditRecipe() {
           <input
             type="text"
             name="imageUrl"
-            placeholder="Image URL"
+            placeholder={image}
             value={image}
             onChange={handleImage}
           />
@@ -140,10 +145,28 @@ function EditRecipe() {
             onChange={handleSteps}
           ></textarea>
         </div>{" "}
+        <div className="form-element">
+          <label>Ingredients</label>
+          <textarea
+            type="text"
+            name="ingredients"
+            placeholder="ingredients"
+            rows="5"
+            value={ingredients}
+            onChange={handleIngredients}
+          ></textarea>
+        </div>{" "}
         <br />
+        {/* buttons */}
         <div className="form-btns">
-          <button type="submit">Add recipe</button>
-          <button onClick={deleteRecipe}>Delete </button>
+          <button type="submit">Update</button>
+          <button
+            type="button"
+            className="main-delete-btn"
+            onClick={deleteRecipe}
+          >
+            Delete
+          </button>
         </div>
       </form>
     </div>
