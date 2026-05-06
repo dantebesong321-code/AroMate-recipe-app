@@ -1,6 +1,6 @@
-import HomePage from "../pages/HomePage";
-import RecipeList from "../Pages/RecipeList";
-import Dashboard from "../Pages/Dashboard";
+import HomePage from "../flows/HomePage";
+import RecipeList from "../flows/RecipeList";
+import Dashboard from "../flows/Dashboard";
 
 function Sidebar() {
   return (

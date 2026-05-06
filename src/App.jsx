@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import HomePage from "./pages/HomePage";
-import RecipeList from "./Pages/RecipeList";
+import HomePage from "./flows/HomePage";
+import RecipeList from "./flows/RecipeList";
 import RecipeCard from "./components/RecipeCard";
-import RecipeDetail from "./pages/RecipeDetail";
+import RecipeDetail from "./flows/RecipeDetail";
 import MyNavbar from "./components/MyNavbar";
-import CreateRecipe from "./pages/CreateRecipe";
-import EditRecipe from "./pages/EditRecipe";
+import CreateRecipe from "./flows/CreateRecipe";
+import EditRecipe from "./flows/EditRecipe";
 
 function App() {
   return (
