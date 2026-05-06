@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
+import CreateRecipe from "./CreateRecipe";
 import Spinner from "react-bootstrap/Spinner";
 
 function RecipeList() {
@@ -30,19 +31,9 @@ function RecipeList() {
   }
 
   return (
-    <div
-      className="recipe-list"
-      style={{ display: "flex", justifyContent: "center" }}
-    >
-      <h4>Recipes</h4>
-      <div
-        style={{
-          display: "flex",
-          gap: "1rem",
-          justifyContent: "center",
-          flexWrap: "wrap",
-        }}
-      >
+    <div className="recipe-list">
+      <h3>Recipes</h3>
+      <div className="recipe-cards">
         {allRecipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe} />
         ))}

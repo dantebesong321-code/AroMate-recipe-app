@@ -1,11 +1,10 @@
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import Form from "react-bootstrap/Form";
+import { useState, useEffect } from "react";
+import axios from "axios"; // used for calling the API
+import { useParams, useNavigate } from "react-router-dom";
 
-function CreateRecipe() {
+function EditRecipe() {
   const navigate = useNavigate();
-
+  const { recipeId } = useParams();
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
@@ -13,12 +12,26 @@ function CreateRecipe() {
   const [cookingTime, setCookingTime] = useState("");
   const [steps, setSteps] = useState("");
 
-  const handleTitle = (e) => setTitle(e.target.value);
-  const handleImage = (e) => setImage(e.target.value);
-  const handleDescription = (e) => setDescription(e.target.value);
-  const handleDifficulty = (e) => setDifficulty(e.target.value);
-  const handleCookingTime = (e) => setCookingTime(e.target.value);
-  const handleSteps = (e) => setSteps(e.target.value);
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5008/recipes/${recipeId}`,
+        body,
+      );
+      console.log(response.data);
+      setTitle(response.data.title);
+      setImage(response.data.image);
+      setDescription(response.data.description);
+      setDifficulty(response.data.difficulty);
+      setSteps(response.data.steps);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,8 +83,8 @@ function CreateRecipe() {
           <label>Image</label>
           <input
             type="text"
-            name="image"
-            placeholder="Image"
+            name="imageUrl"
+            placeholder="Image URL"
             value={image}
             onChange={handleImage}
           />
@@ -128,4 +141,4 @@ function CreateRecipe() {
   );
 }
 
-export default CreateRecipe;
+export default EditRecipe;

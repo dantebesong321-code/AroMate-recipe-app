@@ -1,7 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
+import EditRecipe from "./EditRecipe";
 
 function RecipeDetail() {
   const [recipe, setRecipe] = useState(null);
@@ -18,6 +20,17 @@ function RecipeDetail() {
       );
       console.log(response.data);
       setRecipe(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteRecipe = async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5008/recipes/${recipeId}`,
+      );
+      navigate("/recipes");
     } catch (error) {
       console.log(error);
     }
@@ -44,11 +57,30 @@ function RecipeDetail() {
         <br />
         <h4>Description</h4>
         <p>{recipe.description}</p>
-        <p>Dificulty:{recipe.difficulty}</p>
-        <p>Cooking Time:{recipe.cookingTime}</p>
+        <br />
+        <div
+          className="taps-icon"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "16px",
+            fontSize: "12px",
+          }}
+        >
+          <p> Dificulty:{recipe.difficulty}</p>
+          <p>Cooking Time: {recipe.cookingTime} min</p>
+        </div>
+        <br />
         <h4>Steps</h4>
-        <p>Steps:{recipe.steps}</p>
-        <p>Steps:{recipe.steps}</p>
+        <p>{recipe.steps}</p>
+      </div>
+      <div className="form-btns">
+        <Link to="/recipes">
+          <button>Back</button>
+        </Link>
+
+        <button onClick={deleteRecipe}>Delete </button>
       </div>
     </div>
   );

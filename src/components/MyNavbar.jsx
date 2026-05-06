@@ -8,10 +8,10 @@ function MyNavbar() {
         backgroundColor: "white",
         height: "60px",
         position: "sticky",
-        padding: "",
+        width: "auto",
       }}
     >
-      <nav>
+      <nav style={{ display: "flex", gap: "8px" }}>
         <Link to="/">
           <button>Home</button>
         </Link>
@@ -20,8 +20,8 @@ function MyNavbar() {
           <button>Recipes</button>
         </Link>
 
-        <Link to="/pages/CreateRecipe">
-          <button>Create recipe</button>
+        <Link to="/recipes/create">
+          <button className="main-cta">Create recipe</button>
         </Link>
       </nav>
     </div>

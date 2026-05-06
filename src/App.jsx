@@ -6,6 +6,7 @@ import RecipeCard from "./components/RecipeCard";
 import RecipeDetail from "./pages/RecipeDetail";
 import MyNavbar from "./components/MyNavbar";
 import CreateRecipe from "./pages/CreateRecipe";
+import EditRecipe from "./pages/EditRecipe";
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
       <MyNavbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/recipes/:recipeId" element={<RecipeDetail />} />
         <Route path="/recipes/create" element={<CreateRecipe />} />
+        <Route path="/recipes/edit/:recipeId" element={<EditRecipe />} />
+        <Route path="/recipes/:recipeId" element={<RecipeDetail />} />
         <Route path="/recipes" element={<RecipeList />} />
       </Routes>
     </>

@@ -3,27 +3,20 @@ import Image from "react-bootstrap/Image";
 
 function HomePage() {
   return (
-    <div
-      className="Hompepage"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        position: "relative",
-        minWidth: "100svh",
-      }}
-    >
+    <div className="hompepage">
       <div className="home-img">
-        <img
+        <Image src="/assets/davide-cantelli-jpkfc5_d-DI-unsplash.jpg" fluid />
+        {/* <img
           src="src/assets/davide-cantelli-jpkfc5_d-DI-unsplash.jpg"
-          width={"450px"}
+          height="450px"
+          width="auto"
           alt=""
-        />
+        /> */}
       </div>
       ;
-      <div className="home-screen-btn" style={{ alignItems: "center" }}>
+      <div className="home-screen-btn">
         <Link to="/recipes">
-          <button>Get Started</button>
+          <button className="main-cta">Get Started</button>
         </Link>
       </div>
     </div>
