@@ -71,7 +71,7 @@ function CreateRecipe() {
           <input
             type="text"
             name="image"
-            placeholder="Image"
+            placeholder="ImageUrl"
             value={image}
             onChange={handleImage}
           />

@@ -48,7 +48,6 @@
 
 body {
   margin: 0;
-  background-color: #e8e8e8;
 }
 
 #root {
@@ -96,8 +95,10 @@ p {
   justify-content: center;
   align-items: center;
   padding: 8px;
-  box-shadow: var(--shadow);
+  background-color: #edecec;
 }
+
+/* CONTENT ZONE */
 .hompepage {
   display: inline;
   justify-content: center;
@@ -119,13 +120,17 @@ p {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  height: 100svh;
+  padding: 24px;
   background-color: #f4f4f4;
+  margin: 24px;
+  border-radius: 8px;
 }
 .recipeDetailsPage {
   background-color: #f3f4f6;
   width: auto;
-  height: 100svh;
+  padding: 24px;
+  margin: 24px;
+  border-radius: 8px;
 }
 .form-element {
   display: flex;
@@ -133,8 +138,40 @@ p {
   flex-direction: column;
   margin: 0px 24px 16px 24px;
   gap: 16px;
+  margin: 8px;
+}
+/* GRID LAYOUT */
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #eeeeee;
+  height: 100%;
+}
+.page-area {
+  height: 100svh;
 }
 
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+  width: 130px;
+  background-color: #ffffff;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  text-align: left;
+  gap: 16px;
+  padding-left: 12px;
+}
+.sidebar-content a {
+  text-decoration: none;
+  color: #1f2028;
+}
+/* FORM HANDLING */
 .form-element label {
   text-align: left;
   line-height: 4px;
@@ -147,10 +184,16 @@ p {
   height: 24px;
   margin-bottom: 12px;
 }
+
+/* BTN */
 .main-cta {
   background-color: #179501;
   color: #e8e8e8;
 }
+.main-cta:hover {
+  background-color: #116e01;
+}
+
 .form-btns {
   display: flex;
   margin-top: 30px;
@@ -163,5 +206,9 @@ button {
   height: 30px;
   border: none;
   background-color: #ebebeb;
-  border-radius: 16px;
+  border-radius: 4px;
+  transition: 0.5s;
+}
+button:hover {
+  background-color: #dddddd;
 }

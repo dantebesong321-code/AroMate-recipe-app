@@ -11,10 +11,11 @@ function RecipeCard({ recipe }) {
           width: "15rem",
           height: "350px",
           padding: "12px",
-          backgroundColor: "#f4f6f6",
+          backgroundColor: "#ffffff",
           display: "flex",
           flexDirection: "column",
           borderRadius: "16px",
+          textAlign: "left",
         }}
       >
         <div style={{ height: "180px", overflow: "hidden" }}>
@@ -34,7 +35,7 @@ function RecipeCard({ recipe }) {
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
             flexGrow: 1,
           }}
         >
@@ -42,12 +43,15 @@ function RecipeCard({ recipe }) {
             style={{
               fontSize: "1.1rem",
               fontWeight: "bold",
+              fontSize: "19px",
             }}
           >
-            <br />
             {recipe.title}
           </Card.Title>
-          <Card.Text>{recipe.description}</Card.Text> <br />
+          <Card.Text style={{ fontSize: "16px" }}>
+            {recipe.description}
+          </Card.Text>{" "}
+          <br />
           <Link to={`/recipes/${recipe.id}`}>
             <Button variant="primary">See more</Button>
           </Link>

@@ -1,19 +1,19 @@
-import HomePage from "../flows/HomePage";
-import RecipeList from "../flows/RecipeList";
-import Dashboard from "../flows/Dashboard";
+import HomePage from "../pages/HomePage";
+import RecipeList from "../pages/RecipeList";
+import Dashboard from "../pages/Dashboard";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <div className="side-bar">
-      <Link>
-        <HomePage />
+    <div className="sidebar-content">
+      <Link to="/">
+        <a href="/">Home</a>
       </Link>
-      <Link>
-        <Dashboard />
-      </Link>
-
       <Link to="/recipes">
-        <button className="main-cta">Get Started</button>
+        <a href="/recipes">Dashboard</a>
+      </Link>
+      <Link to="/recipes/create">
+        <a href="/recipes/create">New recipe</a>
       </Link>
     </div>
   );
