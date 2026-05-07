@@ -13,7 +13,7 @@ function HomePage() {
           alt=""
         />
       </div>
-      ;
+
       <div className="home-screen-btn">
         <Link to="/recipes">
           <button className="main-cta">Get Started</button>

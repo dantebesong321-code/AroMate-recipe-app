@@ -17,7 +17,7 @@ function RecipeDetail() {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5008/recipes/${recipeId}`,
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
       console.log(response.data);
       setRecipe(response.data);
@@ -29,7 +29,7 @@ function RecipeDetail() {
   const deleteRecipe = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:5008/recipes/${recipeId}`,
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
       navigate("/recipes");
     } catch (error) {

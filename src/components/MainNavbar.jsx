@@ -8,19 +8,10 @@ import Col from "react-bootstrap/Col";
 function MainNavbar() {
   return (
     <div className="nav-container">
-      <div>Logo</div>
-      <div className="nav-form-elements">
-        <Navbar className="bg-body-tertiary justify-content-right">
-          <Form className="search-bar">
-            <Form.Control
-              type="text"
-              placeholder="Search"
-              className=" mr-sm-2"
-            />
-            <Button type="submit">Submit</Button>
-          </Form>
-        </Navbar>
+      <div>
+        <h4>AroMate</h4>
       </div>
+      <div className="nav-form-elements"></div>
     </div>
   );
 }

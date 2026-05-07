@@ -33,7 +33,10 @@ function CreateRecipe() {
     };
 
     try {
-      const response = await axios.post("http://localhost:5008/recipes", body);
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/recipes`,
+        body,
+      );
       navigate("/recipes");
     } catch (error) {
       console.log(error);
@@ -43,7 +46,7 @@ function CreateRecipe() {
   const deleteRecipe = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:5008/recipes/${recipeId}`,
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
       navigate("/recipes");
     } catch (error) {

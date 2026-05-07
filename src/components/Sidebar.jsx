@@ -1,6 +1,5 @@
 import HomePage from "../pages/HomePage";
 import RecipeList from "../pages/RecipeList";
-import Dashboard from "../pages/Dashboard";
 import { Link } from "react-router-dom";
 
 function Sidebar() {

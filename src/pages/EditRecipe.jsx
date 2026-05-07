@@ -58,7 +58,7 @@ function EditRecipe() {
 
     try {
       const response = await axios.put(
-        `http://localhost:5008/recipes/${recipeId}`,
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
         body,
       );
       navigate("/recipes");
@@ -70,7 +70,7 @@ function EditRecipe() {
   const deleteRecipe = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:5008/recipes/${recipeId}`,
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
       navigate("/recipes");
     } catch (error) {
