@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+// import BookmarkIcon from "./BookmarkIcon";
 
 function RecipeCard({ recipe }) {
   const cardStyle = {};
@@ -13,13 +14,10 @@ function RecipeCard({ recipe }) {
           width: "15rem",
           height: "250px",
           padding: "12px",
-          backgroundColor: "#ffffff",
           display: "flex",
           flexDirection: "column",
           borderRadius: "16px",
           textAlign: "left",
-          boxShadow:
-            "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1",
         }}
       >
         <div style={{ height: "180px", overflow: "hidden" }}>
@@ -60,6 +58,7 @@ function RecipeCard({ recipe }) {
           <Link to={`/recipes/${recipe.id}`}>
             <Button variant="primary">See more</Button>
           </Link>
+          {/* <BookmarkIcon recipeId={recipe.id} /> */}
         </Card.Body>
       </Card>
     </div>

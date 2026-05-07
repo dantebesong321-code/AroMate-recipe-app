@@ -12,6 +12,7 @@ function CreateRecipe() {
   const [difficulty, setDifficulty] = useState("");
   const [cookingTime, setCookingTime] = useState("");
   const [steps, setSteps] = useState("");
+  const [ingredients, setIngredients] = useState("");
 
   const handleTitle = (e) => setTitle(e.target.value);
   const handleImage = (e) => setImage(e.target.value);
@@ -19,6 +20,7 @@ function CreateRecipe() {
   const handleDifficulty = (e) => setDifficulty(e.target.value);
   const handleCookingTime = (e) => setCookingTime(e.target.value);
   const handleSteps = (e) => setSteps(e.target.value);
+  const handleIngredients = (e) => setIngredients(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,6 +121,17 @@ function CreateRecipe() {
             rows="5"
             value={steps}
             onChange={handleSteps}
+          ></textarea>
+        </div>{" "}
+        <div className="form-element">
+          <label>Ingredients</label>
+          <textarea
+            type="text"
+            name="ingredients"
+            placeholder="ingredients"
+            rows="5"
+            value={ingredients}
+            onChange={handleIngredients}
           ></textarea>
         </div>{" "}
         <br />

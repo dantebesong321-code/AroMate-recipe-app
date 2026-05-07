@@ -14,12 +14,6 @@ function MyNavbar() {
       <div>
         <SearchBar />
       </div>
-
-      <nav style={{ display: "flex", gap: "8px" }}>
-        <Link to="/recipes/create">
-          <button className="main-cta">Create recipe</button>
-        </Link>
-      </nav>
     </div>
   );
 }

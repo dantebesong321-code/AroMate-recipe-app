@@ -11,7 +11,6 @@ function MainNavbar() {
       <div>
         <h4>AroMate</h4>
       </div>
-      <div className="nav-form-elements"></div>
     </div>
   );
 }

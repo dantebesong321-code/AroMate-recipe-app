@@ -37,12 +37,24 @@ function RecipeList(props) {
 
   return (
     <div className="recipe-list">
-      <div>
+      <div
+        className="searchbar"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          margin: "24px",
+          gap: "12px",
+        }}
+      >
         {" "}
         <SearchBar
           allRecipes={allRecipes}
           setFilteredRecipes={setFilteredRecipes}
         />
+        <Link to="/recipes/create">
+          <button className="main-cta">Create recipe</button>
+        </Link>
       </div>
       <h3>Recipes</h3>
       <div className="recipe-cards">

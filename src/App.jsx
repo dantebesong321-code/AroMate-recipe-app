@@ -11,6 +11,7 @@ import SideBar from "./components/SideBar";
 // import { Navbar } from "react-bootstrap";
 import MainNavBar from "./components/MainNavBar";
 import Footer from "./components/Footer";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -23,13 +24,13 @@ function App() {
         </div>
 
         <div className="page-area">
-          <MyNavBar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/recipes/create" element={<CreateRecipe />} />
             <Route path="/recipes/edit/:recipeId" element={<EditRecipe />} />
             <Route path="/recipes/:recipeId" element={<RecipeDetail />} />
             <Route path="/recipes" element={<RecipeList />} />
+            <Route path={"*"} element={<NotFoundPage />} />
           </Routes>
         </div>
       </div>
