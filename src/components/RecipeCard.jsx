@@ -74,7 +74,7 @@ function RecipeCard({ recipe }) {
             }}
           >
             {isBookmarked ? (
-              <BsBookmarkFill color="#898989" size={16} />
+              <BsBookmarkFill color="#008840" size={16} />
             ) : (
               <BsBookmark color="#7f7f7f" size={16} />
             )}

@@ -7,7 +7,7 @@ import RecipeDetail from "./pages/RecipeDetail";
 import CreateRecipe from "./pages/CreateRecipe";
 import EditRecipe from "./pages/EditRecipe";
 import SideBar from "./components/SideBar";
-// import BookmarkPage from "./pages/BookmarkPage";
+import BookmarkPage from "./pages/BookmarkPage";
 import MainNavBar from "./components/MainNavBar";
 import Footer from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -29,7 +29,7 @@ function App() {
             <Route path="/recipes/edit/:recipeId" element={<EditRecipe />} />
             <Route path="/recipes/:recipeId" element={<RecipeDetail />} />
             <Route path="/recipes" element={<RecipeList />} />
-            {/* <Route path="/bookmarks" element={<BookmarkPage />} /> */}
+            <Route path="/bookmarks" element={<BookmarkPage />} />
             <Route path={"*"} element={<NotFoundPage />} />
           </Routes>
         </div>
