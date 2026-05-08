@@ -52,20 +52,33 @@ Instantly filter recipes by title using the search bar.
 
 ## 📂 Project Structure
 
+# 📂 Project Structure
+
 ```bash
 src/
 │
 ├── components/
+│   ├── BookmarkIcon.jsx
+│   ├── Footer.jsx
+│   ├── Forms.jsx
+│   ├── MainNavBar.jsx
+│   ├── MyNavBar.jsx
 │   ├── RecipeCard.jsx
 │   ├── SearchBar.jsx
-│   └── BookmarkIcon.jsx
+│   └── SideBar.jsx
 │
 ├── pages/
-│   ├── RecipeList.jsx
+│   ├── AboutPage.jsx
+│   ├── BookmarkPage.jsx
 │   ├── CreateRecipe.jsx
 │   ├── EditRecipe.jsx
-│   └── BookmarkPage.jsx
+│   ├── HomePage.jsx
+│   ├── NotFoundPage.jsx
+│   ├── RecipeDetail.jsx
+│   └── RecipeList.jsx
 │
-│
-└── App.jsx
+├── App.css
+├── App.jsx
+├── index.css
+└── main.jsx
 ```
