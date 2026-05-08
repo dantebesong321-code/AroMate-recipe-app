@@ -41,7 +41,7 @@ function Sidebar() {
         </div>
       </Link>
 
-      <Link to="/recipes">
+      <Link to="/bookmarks">
         {" "}
         <div className="sibar-tabs">
           <img

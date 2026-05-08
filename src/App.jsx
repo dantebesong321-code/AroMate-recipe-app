@@ -4,11 +4,10 @@ import HomePage from "./pages/HomePage";
 import RecipeList from "./pages/RecipeList";
 import RecipeCard from "./components/RecipeCard";
 import RecipeDetail from "./pages/RecipeDetail";
-import MyNavBar from "./components/MyNavBar";
 import CreateRecipe from "./pages/CreateRecipe";
 import EditRecipe from "./pages/EditRecipe";
 import SideBar from "./components/SideBar";
-// import { Navbar } from "react-bootstrap";
+// import BookmarkPage from "./pages/BookmarkPage";
 import MainNavBar from "./components/MainNavBar";
 import Footer from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -30,6 +29,7 @@ function App() {
             <Route path="/recipes/edit/:recipeId" element={<EditRecipe />} />
             <Route path="/recipes/:recipeId" element={<RecipeDetail />} />
             <Route path="/recipes" element={<RecipeList />} />
+            {/* <Route path="/bookmarks" element={<BookmarkPage />} /> */}
             <Route path={"*"} element={<NotFoundPage />} />
           </Routes>
         </div>

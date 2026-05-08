@@ -1,41 +1,42 @@
 // import { useEffect, useState } from "react";
-// import axios from "axios";
 // import RecipeCard from "../components/RecipeCard";
-// import { Navigate } from "react-router-dom";
 
 // function BookmarkPage() {
 //   const [bookmarkedRecipes, setBookmarkedRecipes] = useState([]);
 
 //   useEffect(() => {
-//     getBookmarkedRecipes();
+//     const storedBookmarks =
+//       JSON.parse(localStorage.getItem("bookmarkedRecipes")) || [];
+
+//     setBookmarkedRecipes(storedBookmarks);
 //   }, []);
 
-//   const getBookmarkedRecipes = async () => {
-//     try {
-//       const response = await axios.get(
-//         `${import.meta.env.VITE_SERVER_URL}/recipes`,
-//       );
+//   const removeFromBookmarks = (recipeId) => {
+//     const updatedBookmarks = bookmarkedRecipes.filter(
+//       (recipe) => recipe.id !== recipeId,
+//     );
 
-//       const bookmarkedIds = getBookmarks();
+//     setBookmarkedRecipes(updatedBookmarks);
 
-//       const filtered = response.data.filter((recipe) =>
-//         bookmarkedIds.includes(recipe.id),
-//       );
-
-//       setBookmarkedRecipes(filtered);
-//     } catch (error) {
-//       console.log(error);
-//     }
+//     localStorage.setItem("bookmarkedRecipes", JSON.stringify(updatedBookmarks));
 //   };
 
 //   return (
 //     <div className="recipe-list">
-//       <h2>Bookmarked Recipes</h2>
+//       <h2>My Bookmarked Recipes</h2>
 
 //       <div className="recipe-cards">
-//         {bookmarkedRecipes.map((recipe) => (
-//           <RecipeCard key={recipe.id} recipe={recipe} />
-//         ))}
+//         {bookmarkedRecipes.length === 0 ? (
+//           <p>No bookmarked recipes yet.</p>
+//         ) : (
+//           bookmarkedRecipes.map((recipe) => (
+//             <RecipeCard
+//               key={recipe.id}
+//               recipe={recipe}
+//               removeFromBookmarks={removeFromBookmarks}
+//             />
+//           ))
+//         )}
 //       </div>
 //     </div>
 //   );

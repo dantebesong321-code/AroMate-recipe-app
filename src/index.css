@@ -48,14 +48,6 @@
 
 /* GOOGLE ICONS */
 
-.material-symbols-outlined {
-  font-variation-settings:
-    "FILL" 0,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 40;
-}
-
 body {
   margin: 0;
   scroll-behavior: smooth;
@@ -103,10 +95,19 @@ p {
 }
 .nav-container {
   position: sticky;
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
   z-index: 1;
+  background-color: #ffffff;
+  color: #0f5403;
+  padding: 16px;
   box-shadow:
     0 4px 8px 0 rgba(108, 132, 64, 0.01),
     0 6px 20px 0 rgba(87, 97, 28, 0.05);
+}
+.nav-container a {
+  text-decoration: none;
 }
 
 .nav-bar {
@@ -118,11 +119,11 @@ p {
 
   padding: 8px;
 }
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  padding: 16px;
+.navbar-text {
+  font-size: 14px;
+  color: #16171d;
 }
+
 .nav-form-elements {
   display: flex;
   gap: 8px;
@@ -151,20 +152,6 @@ p {
 .search-box input:hover {
   border-color: #409b00;
 }
-
-/* .search-box button {
-  padding: 10px;
-  border: none;
-  background: #d9d9d9;
-  color: rgb(243, 243, 243);
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.search-box button:hover {
-  background: #b2b2b2;
-} */
-*/
 
 /* CONTENT ZONE */
 .hompepage {

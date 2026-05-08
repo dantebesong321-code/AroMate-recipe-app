@@ -1,17 +1,18 @@
+import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 function MainNavbar() {
   return (
-    <div className="nav-container">
-      <div>
-        <h4>AroMate</h4>
-      </div>
-    </div>
+    <Navbar>
+      <Container className="nav-container">
+        <Navbar.Brand href="/">
+          <h2>AroMate</h2>
+        </Navbar.Brand>
+        <Navbar.Text>
+          Signed in as: <a href="#login">Jane Doe</a>
+        </Navbar.Text>
+      </Container>
+    </Navbar>
   );
 }
 

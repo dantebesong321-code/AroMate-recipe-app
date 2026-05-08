@@ -1,31 +1,45 @@
 // import { useEffect, useState } from "react";
 // import axios from "axios";
-// import RecipeCard from "../components/RecipeCard";
-// import { Navigate } from "react-router-dom";
-// // import {
-// //   addBookmark,
-// //   removeBookmark,
-// //   isBookmarked,
-// // } from "../utils/bookmarkUtils";
 
-// function BookmarkIcon({ recipe }) {
-//   const [bookmarked, setBookmarked] = useState(false);
+// function FavoriteRecipes() {
+//   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
 //   useEffect(() => {
-//     setBookmarked(isBookmarked(recipe.id));
-//   }, [recipe.id]);
+//     const storedFavorites =
+//       JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
 
-//   const handleBookmark = () => {
-//     if (bookmarked) {
-//       removeBookmark(recipe.id);
-//       setBookmarked(false);
-//     } else {
-//       addBookmark(recipe);
-//       setBookmarked(true);
-//     }
+//     setFavoriteRecipes(storedFavorites);
+//   }, []);
+
+//   const removeFromFavorites = (recipeId) => {
+//     const updatedFavorites = favoriteRecipes.filter((recipe) => {
+//       return recipe.id !== recipeId;
+//     });
+
+//     setFavoriteRecipes(updatedFavorites);
+
+//     localStorage.setItem("favoriteRecipes", JSON.stringify(updatedFavorites));
 //   };
 
-//   return <button onClick={handleBookmark}>{bookmarked ? "★" : "☆"}</button>;
+//   return (
+//     <div>
+//       <h1>My Favorite Recipes</h1>
+
+//       {favoriteRecipes.length === 0 ? (
+//         <p>No favorite recipes yet.</p>
+//       ) : (
+//         favoriteRecipes.map((recipe) => {
+//           return (
+//             <FavoriteRecipeCard
+//               key={recipe.id}
+//               recipe={recipe}
+//               removeFromFavorites={removeFromFavorites}
+//             />
+//           );
+//         })
+//       )}
+//     </div>
+//   );
 // }
 
-// export default BookmarkIcon;
+// export default FavoriteRecipes;

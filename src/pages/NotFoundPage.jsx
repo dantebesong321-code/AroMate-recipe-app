@@ -5,10 +5,10 @@ function NotFoundPage() {
     <div>
       <h2>Oops, nothing here!</h2>
 
-      <h5>Please return to Home Page</h5>
+      <h5>Please return to HomePage</h5>
 
       <Link to={"/"}>
-        <img src={pokeballImg} alt="pokeball" width={70} />
+        <h4>Back to home</h4>
       </Link>
     </div>
   );

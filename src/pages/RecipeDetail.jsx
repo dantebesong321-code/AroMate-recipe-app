@@ -8,7 +8,7 @@ import EditRecipe from "./EditRecipe";
 function RecipeDetail() {
   const [recipe, setRecipe] = useState(null);
   const { recipeId } = useParams();
-  const naivgate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getData();
@@ -64,7 +64,7 @@ function RecipeDetail() {
             fontSize: "12px",
           }}
         >
-          <p> Dificulty:{recipe.difficulty}</p>
+          <p> Difficulty: {recipe.difficulty}</p>
           <p>Cooking Time: {recipe.cookingTime} min</p>
         </div>
         <hr />
