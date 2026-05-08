@@ -8,14 +8,14 @@ import CreateRecipe from "./pages/CreateRecipe";
 import EditRecipe from "./pages/EditRecipe";
 import SideBar from "./components/SideBar";
 import BookmarkPage from "./pages/BookmarkPage";
-import MainNavBar from "./components/MainNavBar";
+import MainNavbar from "./components/MainNavbar";
 import Footer from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
     <>
-      <MainNavBar />
+      <MainNavbar />
 
       <div className="grid-container">
         <div className="side-bar">
