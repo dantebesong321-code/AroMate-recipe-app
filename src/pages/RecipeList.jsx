@@ -29,9 +29,15 @@ function RecipeList(props) {
 
   if (!allRecipes) {
     return (
-      <Spinner animation="border" role="status">
-        <span className="visually">Loading...</span>
-      </Spinner>
+      <div className="loader-container">
+        <Spinner animation="border" role="status" className="animated-spinner">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+
+        <p className="loading-text">
+          Loading recipes, this make take a moment. Thanks for your patience :)
+        </p>
+      </div>
     );
   }
 

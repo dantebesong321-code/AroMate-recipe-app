@@ -379,3 +379,51 @@ button:hover {
 #footer a {
   color: #22e400;
 }
+.loader-container {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.animated-spinner {
+  width: 4rem !important;
+  height: 4rem !important;
+  color: #ff6b35;
+  animation:
+    spinner-grow 1.2s linear infinite,
+    glow 1.5s ease-in-out infinite alternate;
+}
+
+.loading-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 2px #ff6b35);
+  }
+
+  to {
+    filter: drop-shadow(0 0 12px #ff6b35);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}
