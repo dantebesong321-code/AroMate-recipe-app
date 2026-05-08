@@ -52,8 +52,6 @@ Instantly filter recipes by title using the search bar.
 
 ## 📂 Project Structure
 
-# 📂 Project Structure
-
 ```bash
 src/
 │
@@ -82,3 +80,13 @@ src/
 ├── index.css
 └── main.jsx
 ```
+
+# 🔗 Links
+
+## 🌐 Live Server
+
+https://aromate-recipe-app-server.onrender.com
+
+## 💻 Client Repository
+
+(https://github.com/dantebesong321-code/AroMate-recipe-app.git)
