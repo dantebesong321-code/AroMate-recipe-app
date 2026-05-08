@@ -19,12 +19,10 @@ function RecipeList(props) {
       const response = await axios.get(
         `${import.meta.env.VITE_SERVER_URL}/recipes`,
       );
-      console.log(response.data);
+
       setAllRecipes(response.data);
       setFilteredRecipes(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   if (!allRecipes) {

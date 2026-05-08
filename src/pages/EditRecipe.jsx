@@ -157,7 +157,6 @@ function EditRecipe() {
           ></textarea>
         </div>{" "}
         <br />
-        {/* buttons */}
         <div className="form-btns">
           <button type="submit">Update</button>
           <button

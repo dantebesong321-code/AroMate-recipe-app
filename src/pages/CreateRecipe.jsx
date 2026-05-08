@@ -40,9 +40,7 @@ function CreateRecipe() {
         body,
       );
       navigate("/recipes");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const deleteRecipe = async () => {
@@ -51,9 +49,7 @@ function CreateRecipe() {
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
       navigate("/recipes");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (
