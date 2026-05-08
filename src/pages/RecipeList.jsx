@@ -7,8 +7,8 @@ import Spinner from "react-bootstrap/Spinner";
 import SearchBar from "../components/SearchBar";
 
 function RecipeList(props) {
-  const [allRecipes, setAllRecipes] = useState([]);
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [allRecipes, setAllRecipes] = useState(null);
+  const [filteredRecipes, setFilteredRecipes] = useState(null);
 
   useEffect(() => {
     getData();

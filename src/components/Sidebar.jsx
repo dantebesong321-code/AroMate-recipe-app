@@ -1,7 +1,6 @@
 import HomePage from "../pages/HomePage";
 import RecipeList from "../pages/RecipeList";
 import { Link } from "react-router-dom";
-// import BookmarkPage from "../pages/BookmarkPage";
 
 function Sidebar() {
   return (
