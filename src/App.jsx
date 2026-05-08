@@ -6,7 +6,7 @@ import RecipeCard from "./components/RecipeCard";
 import RecipeDetail from "./pages/RecipeDetail";
 import CreateRecipe from "./pages/CreateRecipe";
 import EditRecipe from "./pages/EditRecipe";
-import SideBar from "./components/SideBar";
+import Sidebar from "./components/Sidebar";
 import BookmarkPage from "./pages/BookmarkPage";
 import MainNavbar from "./components/MainNavbar";
 import Footer from "./components/Footer";
@@ -19,7 +19,7 @@ function App() {
 
       <div className="grid-container">
         <div className="side-bar">
-          <SideBar />
+          <Sidebar />
         </div>
 
         <div className="page-area">

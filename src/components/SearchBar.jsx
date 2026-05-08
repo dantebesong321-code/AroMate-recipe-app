@@ -22,8 +22,6 @@ function SearchBar({ allRecipes, setFilteredRecipes }) {
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
         />
-
-        {/* <button type="submit">Search</button> */}
       </form>
     </div>
   );
