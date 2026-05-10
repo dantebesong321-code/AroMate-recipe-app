@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 function NotFoundPage() {
   return (
-    <div>
+    <div className="not-found-page">
+      {" "}
+      <br />
       <h2>Oops, nothing here!</h2>
-
-      <h5>Please return to HomePage</h5>
-
-      <Link to={"/"}>
-        <h4>Back to home</h4>
+      <h5></h5>
+      <Link to={"/dashboard"}>
+        <h4>Return to Dashboard</h4>
       </Link>
     </div>
   );

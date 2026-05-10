@@ -158,8 +158,14 @@ p {
   background-color: #f6f9ef;
   justify-content: center;
   align-items: center;
-  max-height: 100svh;
+  min-height: 120vh;
 }
+.about-page {
+  margin-right: 40px;
+  margin-left: 40px;
+  min-height: 100vh;
+}
+
 .hero {
   margin-top: 30px;
   display: flex;
@@ -268,6 +274,16 @@ img {
   height: auto;
   padding-bottom: 32px;
 }
+.not-found-page {
+  display: block;
+  align-content: center;
+  min-height: 50vh;
+}
+
+.bookmar-list {
+  margin-top: 32px;
+  min-height: 50vh;
+}
 
 .side-bar {
   display: flex;
@@ -340,6 +356,17 @@ img {
   border: #960014 solid 1px;
 }
 .main-delete-btn:hover {
+  color: #ffffff;
+  background-color: #b4031a;
+}
+
+.confirm-delete-btn {
+  background-color: #faa4a4;
+  color: #5b0000;
+  border: #960014 solid 1px;
+}
+
+.confirm-delete-btn:hover {
   color: #ffffff;
   background-color: #b4031a;
 }
@@ -426,4 +453,30 @@ button:hover {
   100% {
     opacity: 0.4;
   }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
 }

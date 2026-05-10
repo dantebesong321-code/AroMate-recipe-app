@@ -22,9 +22,8 @@ function BookmarkPage() {
   };
 
   return (
-    <div className="recipe-list">
-      <h2>My Bookmarked Recipes</h2>
-
+    <div className="bookmar-list">
+      <h2>My Bookmarked Recipes</h2> <br />
       <div className="recipe-cards">
         {bookmarkedRecipes.length === 0 ? (
           <p>No bookmarked recipes yet.</p>

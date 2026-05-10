@@ -97,7 +97,7 @@ function RecipeCard({ recipe }) {
             {recipe.description}
           </Card.Text>
           <br />
-          <Link to={`/recipes/${recipe.id}`}>
+          <Link to={`/dashboard/recipes/${recipe.id}`}>
             <Button variant="primary">See more</Button>
           </Link>
         </Card.Body>

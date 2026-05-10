@@ -9,6 +9,7 @@ function RecipeDetail() {
   const [recipe, setRecipe] = useState(null);
   const { recipeId } = useParams();
   const navigate = useNavigate();
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     getData();
@@ -29,6 +30,17 @@ function RecipeDetail() {
   const deleteRecipe = async () => {
     try {
       const response = await axios.delete(
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
+      );
+      navigate("/recipes");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
       navigate("/recipes");
@@ -93,20 +105,46 @@ function RecipeDetail() {
           )}
         </ul>
       </div>
-
+      {/* Rating */}
+      <div></div>
+      {/*  */}
       <div className="form-btns">
-        <Link to="/recipes">
+        <Link to="/dashboard/recipes">
           <button>Back</button>
         </Link>
 
-        <Link to={`/recipes/edit/${recipe.id}`}>
+        <Link to={`/dashboard/recipes/edit/${recipe.id}`}>
           <button>Edit</button>
         </Link>
 
-        <button className="main-delete-btn" onClick={deleteRecipe}>
-          Delete{" "}
+        <button
+          className="main-delete-btn"
+          onClick={() => setShowConfirm(true)}
+        >
+          Delete
         </button>
       </div>
+      {showConfirm && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Delete Recipe?</h3>
+            <p>This action cannot be undone.</p>
+
+            <div className="modal-actions">
+              <button
+                className="cancel-btn"
+                onClick={() => setShowConfirm(false)}
+              >
+                Cancel
+              </button>
+
+              <button className="confirm-delete-btn" onClick={confirmDelete}>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

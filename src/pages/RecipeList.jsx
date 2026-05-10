@@ -5,6 +5,7 @@ import RecipeCard from "../components/RecipeCard";
 import CreateRecipe from "./CreateRecipe";
 import Spinner from "react-bootstrap/Spinner";
 import SearchBar from "../components/SearchBar";
+import { BiColorFill } from "react-icons/bi";
 
 function RecipeList(props) {
   const [allRecipes, setAllRecipes] = useState(null);
@@ -33,7 +34,7 @@ function RecipeList(props) {
         </Spinner>
 
         <p className="loading-text">
-          Loading recipes, this make take a moment. Thanks for your patience :)
+          Loading recipes, this may take a moment. Thanks for your patience :)
         </p>
       </div>
     );
@@ -56,10 +57,11 @@ function RecipeList(props) {
           allRecipes={allRecipes}
           setFilteredRecipes={setFilteredRecipes}
         />
-        <Link to="/recipes/create">
+        <Link to="/dashboard/recipes/create">
           <button className="main-cta">Create recipe</button>
         </Link>
-      </div>
+      </div>{" "}
+      <hr />
       <h3>Recipes</h3>
       <div className="recipe-cards">
         {filteredRecipes.map((recipe) => (

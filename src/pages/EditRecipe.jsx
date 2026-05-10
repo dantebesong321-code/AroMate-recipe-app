@@ -13,6 +13,8 @@ function EditRecipe() {
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
 
+  const [showConfirm, setShowConfirm] = useState(false);
+
   useEffect(() => {
     getData();
   }, []);
@@ -61,7 +63,7 @@ function EditRecipe() {
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
         body,
       );
-      navigate("/recipes");
+      navigate("/dashboard/recipes");
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +74,18 @@ function EditRecipe() {
       const response = await axios.delete(
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
-      navigate("/recipes");
+      navigate("/dashboard/recipes");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
+      );
+      navigate("/dashboard/recipes");
     } catch (error) {
       console.log(error);
     }
@@ -160,14 +173,35 @@ function EditRecipe() {
         <div className="form-btns">
           <button type="submit">Update</button>
           <button
-            type="button"
             className="main-delete-btn"
-            onClick={deleteRecipe}
+            onClick={() => setShowConfirm(true)}
           >
             Delete
           </button>
         </div>
       </form>
+
+      {showConfirm && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Delete Recipe?</h3>
+            <p>This action cannot be undone.</p>
+
+            <div className="modal-actions">
+              <button
+                className="cancel-btn"
+                onClick={() => setShowConfirm(false)}
+              >
+                Cancel
+              </button>
+
+              <button className="confirm-delete-btn" onClick={confirmDelete}>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import Image from "react-bootstrap/Image";
+import Dashboard from "../components/Dashboard";
 
-function HomePage() {
+function HomePage(props) {
   return (
     <div className="hompepage">
       <div className="hero">
@@ -13,10 +14,11 @@ function HomePage() {
           </p>{" "}
           <br />
           <div className="home-screen-btn">
-            <Link to="/recipes">
+            <Link to="/dashboard">
               <button className="main-cta">Explore Recipes</button>
             </Link>
-          </div>
+          </div>{" "}
+          <br />
         </div>
         <img
           src="src/assets/ahmadreza-rezaie-HauwfP60Gko-unsplash.jpg"

@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 
 function CreateRecipe() {
   const navigate = useNavigate();
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
@@ -39,7 +40,7 @@ function CreateRecipe() {
         `${import.meta.env.VITE_SERVER_URL}/recipes`,
         body,
       );
-      navigate("/recipes");
+      navigate("dashboard/recipes");
     } catch (error) {}
   };
 
@@ -48,8 +49,19 @@ function CreateRecipe() {
       const response = await axios.delete(
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
-      navigate("/recipes");
+      navigate("/dashboard/recipes");
     } catch (error) {}
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
+      );
+      navigate("/dashboard/recipes");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -76,7 +88,7 @@ function CreateRecipe() {
             value={image}
             onChange={handleImage}
           />
-        </div>
+        </div>{" "}
         <div className="form-element">
           <label className="form-label">Description</label>
           <textarea
@@ -118,7 +130,8 @@ function CreateRecipe() {
             value={steps}
             onChange={handleSteps}
           ></textarea>
-        </div>{" "}
+        </div>
+        {"  "}
         <div className="form-element">
           <label>Ingredients</label>
           <textarea
@@ -133,11 +146,37 @@ function CreateRecipe() {
         <br />
         <div className="form-btns">
           <button type="submit">Add recipe</button>
-          <button className="main-delete-btn" onClick={deleteRecipe}>
-            Delete{" "}
+
+          <button
+            className="main-delete-btn"
+            onClick={() => setShowConfirm(true)}
+          >
+            Delete
           </button>
         </div>
       </form>
+
+      {showConfirm && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Delete Recipe?</h3>
+            <p>This action cannot be undone.</p>
+
+            <div className="modal-actions">
+              <button
+                className="cancel-btn"
+                onClick={() => setShowConfirm(false)}
+              >
+                Cancel
+              </button>
+
+              <button className="confirm-delete-btn" onClick={confirmDelete}>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

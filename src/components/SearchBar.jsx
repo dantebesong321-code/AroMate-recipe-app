@@ -1,3 +1,4 @@
+import { AiOutlineSearch } from "react-icons/ai";
 import { useState } from "react";
 
 function SearchBar({ allRecipes, setFilteredRecipes }) {
@@ -22,7 +23,7 @@ function SearchBar({ allRecipes, setFilteredRecipes }) {
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
         />
-      </form>
+      </form>{" "}
     </div>
   );
 }

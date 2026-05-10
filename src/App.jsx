@@ -11,29 +11,30 @@ import BookmarkPage from "./pages/BookmarkPage";
 import MainNavbar from "./components/MainNavbar";
 import Footer from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage";
+import Dashboard from "./components/Dashboard";
+import AboutPage from "./pages/AboutPage";
+import { Outlet } from "react-router-dom";
+import StarRate from "./components/StarRate";
 
 function App() {
   return (
     <>
       <MainNavbar />
 
-      <div className="grid-container">
-        <div className="side-bar">
-          <Sidebar />
-        </div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
 
-        <div className="page-area">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/recipes/create" element={<CreateRecipe />} />
-            <Route path="/recipes/edit/:recipeId" element={<EditRecipe />} />
-            <Route path="/recipes/:recipeId" element={<RecipeDetail />} />
-            <Route path="/recipes" element={<RecipeList />} />
-            <Route path="/bookmarks" element={<BookmarkPage />} />
-            <Route path={"*"} element={<NotFoundPage />} />
-          </Routes>
-        </div>
-      </div>
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route index element={<RecipeList />} />
+          <Route path="recipes" element={<RecipeList />} />
+          <Route path="recipes/create" element={<CreateRecipe />} />
+          <Route path="recipes/edit/:recipeId" element={<EditRecipe />} />
+          <Route path="recipes/:recipeId" element={<RecipeDetail />} />
+          <Route path="bookmarks" element={<BookmarkPage />} />
+          <Route path="aboutpage" element={<AboutPage />} />
+          <Route path={"*"} element={<NotFoundPage />} />
+        </Route>
+      </Routes>
       <Footer />
     </>
   );

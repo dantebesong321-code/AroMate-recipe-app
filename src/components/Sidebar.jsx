@@ -1,3 +1,8 @@
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import { BsBookmarkDash } from "react-icons/bs";
+import { CgAddR } from "react-icons/cg";
+import { RxDashboard } from "react-icons/rx";
+import { RiHome2Line } from "react-icons/ri";
 import HomePage from "../pages/HomePage";
 import RecipeList from "../pages/RecipeList";
 import { Link } from "react-router-dom";
@@ -7,48 +12,37 @@ function Sidebar() {
     <div className="sidebar-content">
       <Link to="/">
         <div className="sibar-tabs">
-          <img
-            src="src/assets/icons/home_40dp_FFFFFF_FILL0_wght400_GRAD0_opsz40.png"
-            width={"24px"}
-            alt=""
-          />
+          <RiHome2Line size={"24px"} />
           Home
         </div>
       </Link>
-
-      <Link to="/recipes">
+      <Link to="/dashboard">
         {" "}
         <div className="sibar-tabs">
-          <img
-            src="src/assets/icons/dashboard_40dp_FFFF_FILL0_wght400_GRAD0_opsz40.png"
-            width={"24px"}
-            alt=""
-          />{" "}
+          <RxDashboard size={"24px"} />
           <div className="sibar-tabs">Dashboard </div>{" "}
         </div>
       </Link>
-
-      <Link to="/recipes/create">
+      <Link to="/dashboard/recipes/create">
         {" "}
         <div className="sibar-tabs">
-          <img
-            src="src/assets/icons/add_box_40dp_FFFFFF_FILL0_wght400_GRAD0_opsz40.png"
-            width={"24px"}
-            alt=""
-          />
+          <CgAddR size={"24px"} />
           New recipe{" "}
         </div>
       </Link>
-
-      <Link to="/bookmarks">
+      <Link to="/dashboard/bookmarks">
         {" "}
         <div className="sibar-tabs">
-          <img
-            src="src/assets/icons/bookmark_40dp_FFFFFF_FILL0_wght400_GRAD0_opsz40.png"
-            width={"24px"}
-            alt=""
-          />
+          <BsBookmarkDash size={"24px"} />
           Bookmarks{" "}
+        </div>
+      </Link>{" "}
+      <br /> <br />
+      <Link to="/dashboard/aboutpage">
+        {" "}
+        <div className="sibar-tabs">
+          <AiOutlineInfoCircle size={"24px"} />
+          About{" "}
         </div>
       </Link>
     </div>
