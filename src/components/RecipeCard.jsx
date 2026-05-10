@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useState } from "react";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { MdStar } from "react-icons/md";
 
 function RecipeCard({ recipe }) {
   const getBookmarks = () =>
@@ -28,6 +29,13 @@ function RecipeCard({ recipe }) {
 
     setIsBookmarked((prev) => !prev);
   };
+
+  const averageRating = recipe.reviews?.length
+    ? (
+        recipe.reviews.reduce((acc, review) => acc + Number(review.rating), 0) /
+        recipe.reviews.length
+      ).toFixed(1)
+    : "0";
 
   return (
     <div className="card">
@@ -86,7 +94,6 @@ function RecipeCard({ recipe }) {
             display: "flex",
             flexDirection: "column",
             marginTop: "8px",
-            justifyContent: "space-evenly",
             flexGrow: 1,
           }}
         >
@@ -96,7 +103,21 @@ function RecipeCard({ recipe }) {
           <Card.Text style={{ fontSize: "14px" }}>
             {recipe.description}
           </Card.Text>
-          <br />
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              marginBottom: "8px",
+            }}
+          >
+            <MdStar color="#ffc107" size={18} />
+            <span style={{ fontWeight: "bold" }}>{averageRating}</span>
+            <span style={{ color: "#777", fontSize: "13px" }}>
+              ({recipe.reviews?.length || 0} reviews)
+            </span>
+          </div>
           <Link to={`/dashboard/recipes/${recipe.id}`}>
             <Button variant="primary">See more</Button>
           </Link>

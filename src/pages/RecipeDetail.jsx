@@ -4,12 +4,18 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import EditRecipe from "./EditRecipe";
+import StarRate from "../components/StarRate";
+import { MdStar } from "react-icons/md";
 
 function RecipeDetail() {
   const [recipe, setRecipe] = useState(null);
   const { recipeId } = useParams();
   const navigate = useNavigate();
   const [showConfirm, setShowConfirm] = useState(false);
+
+  const [reviewText, setReviewText] = useState("");
+  const [rating, setRating] = useState(0);
+  const [editingIndex, setEditingIndex] = useState(null);
 
   useEffect(() => {
     getData();
@@ -25,6 +31,72 @@ function RecipeDetail() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleReviewSubmit = async () => {
+    if (!reviewText || !rating) return;
+
+    const newReview = {
+      user: "Anonymous",
+      rating: String(rating),
+      comment: reviewText,
+    };
+
+    let updatedReviews;
+
+    if (editingIndex !== null) {
+      updatedReviews = [...recipe.reviews];
+
+      updatedReviews[editingIndex] = newReview;
+    } else {
+      updatedReviews = [...(recipe.reviews || []), newReview];
+    }
+
+    try {
+      const updatedRecipe = {
+        ...recipe,
+        reviews: updatedReviews,
+      };
+
+      await axios.put(
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
+        updatedRecipe,
+      );
+
+      setRecipe(updatedRecipe);
+
+      setReviewText("");
+      setRating(0);
+      setEditingIndex(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteReview = async (index) => {
+    const updatedReviews = recipe.reviews.filter((_, i) => i !== index);
+
+    try {
+      const updatedRecipe = {
+        ...recipe,
+        reviews: updatedReviews,
+      };
+
+      await axios.put(
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
+        updatedRecipe,
+      );
+
+      setRecipe(updatedRecipe);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editReview = (review, index) => {
+    setReviewText(review.comment);
+    setRating(Number(review.rating));
+    setEditingIndex(index);
   };
 
   const deleteRecipe = async () => {
@@ -103,11 +175,78 @@ function RecipeDetail() {
           ) : (
             <li>{recipe.ingredients}</li>
           )}
-        </ul>
+        </ul>{" "}
+        <br />
+        <hr />
       </div>
-      {/* Rating */}
-      <div></div>
-      {/*  */}
+      <h3>Reviews</h3>
+      <div style={{ marginBottom: "20px" }}>
+        <StarRate rating={rating} setRating={setRating} />
+
+        <textarea
+          value={reviewText}
+          onChange={(e) => setReviewText(e.target.value)}
+          placeholder="Write your review..."
+          style={{
+            width: "100%",
+            marginTop: "12px",
+            padding: "10px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+          }}
+        />
+
+        <button
+          onClick={handleReviewSubmit}
+          style={{
+            marginTop: "10px",
+          }}
+        >
+          {editingIndex !== null ? "Update Review" : "Post Review"}
+        </button>
+      </div>
+      <div>
+        {recipe.reviews?.map((review, index) => (
+          <div
+            key={index}
+            style={{
+              border: "1px solid #ddd",
+              padding: "12px",
+              borderRadius: "10px",
+              marginBottom: "12px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+              }}
+            >
+              {[...Array(Number(review.rating))].map((_, i) => (
+                <MdStar key={i} color="#ffc107" />
+              ))}
+            </div>
+
+            <p style={{ marginTop: "8px" }}>{review.comment}</p>
+
+            <small>— {review.user}</small>
+
+            <div
+              style={{
+                display: "flex",
+                gap: "10px",
+                marginTop: "10px",
+              }}
+            >
+              <button onClick={() => editReview(review, index)}>Edit</button>
+
+              <button onClick={() => deleteReview(index)}>Delete</button>
+            </div>
+          </div>
+        ))}
+      </div>{" "}
+      {/* form buttons below */}
       <div className="form-btns">
         <Link to="/dashboard/recipes">
           <button>Back</button>

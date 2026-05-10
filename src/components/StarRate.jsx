@@ -1,34 +1,30 @@
 import { MdStar } from "react-icons/md";
-
 import { useState } from "react";
 
-function StarRate(props) {
-  const [rating, setRating] = useState(null);
-  const [rateColor, setColor] = useState(null);
-  const [feedback, setFeedback] = useState(null);
-
+function StarRate({ rating, setRating }) {
   return (
-    <>
-      {[...Array(5)].map((star, index) => {
+    <div style={{ display: "flex", gap: "4px" }}>
+      {[...Array(5)].map((_, index) => {
         const currentRate = index + 1;
+
         return (
-          <>
-            <label>
-              <input
-                type="radio"
-                name="rate"
-                value={currentRate}
-                onClick={() => setRating(currentRate)}
-              />
-              <MdStar
-                size={"24px"}
-                color={currentRate <= (rateColor || rating) ? "yellow" : "grey"}
-              />
-            </label>
-          </>
+          <label key={currentRate} style={{ cursor: "pointer" }}>
+            <input
+              type="radio"
+              name="rate"
+              value={currentRate}
+              onChange={() => setRating(currentRate)}
+              style={{ display: "none" }}
+            />
+
+            <MdStar
+              size={24}
+              color={currentRate <= rating ? "#e9b109" : "#d3d3d3"}
+            />
+          </label>
         );
       })}
-    </>
+    </div>
   );
 }
 
