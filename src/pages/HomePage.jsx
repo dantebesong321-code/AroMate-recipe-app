@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import Dashboard from "../components/Dashboard";
-
+import homePageImage from "../assets/homepage-img.jpg";
 function HomePage(props) {
   return (
     <div className="hompepage">
@@ -20,12 +20,7 @@ function HomePage(props) {
           </div>{" "}
           <br />
         </div>
-        <img
-          src="src/assets/ahmadreza-rezaie-HauwfP60Gko-unsplash.jpg"
-          height="350px"
-          width="auto"
-          alt=""
-        />
+        <img src={homePageImage} height="350px" width="auto" alt="" />
       </div>{" "}
       <br />
       <hr /> <br />
