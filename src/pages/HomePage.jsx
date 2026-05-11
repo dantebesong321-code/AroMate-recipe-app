@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import Dashboard from "../components/Dashboard";
 import homePageImage from "../assets/homepage-img.jpg";
+import homePgImage1 from "../assets/home-pg-sub-1.jpg";
+import homePgImage2 from "../assets/home-pg-sub-2.jpg";
+import homePgImage3 from "../assets/home-pg-sub-3.jpg";
+
 function HomePage(props) {
   return (
     <div className="hompepage">
@@ -31,26 +35,11 @@ function HomePage(props) {
       </p>{" "}
       <br />
       <div className="img-container">
-        <img
-          src="src/assets/davide-cantelli-jpkfc5_d-DI-unsplash.jpg"
-          height="150px"
-          width="auto"
-          alt=""
-        />
+        <img src={homePgImage1} height="150px" width="auto" alt="" />
 
-        <img
-          src="src/assets/andraz-lazic-iy_MT2ifklc-unsplash.jpg"
-          height="150px"
-          width="auto"
-          alt=""
-        />
+        <img src={homePgImage2} height="150px" width="auto" alt="" />
 
-        <img
-          src="src/assets/alex-munsell-Yr4n8O_3UPc-unsplash.jpg"
-          height="150px"
-          width="auto"
-          alt=""
-        />
+        <img src={homePgImage3} height="150px" width="auto" alt="" />
       </div>{" "}
       <br />
       <hr />
