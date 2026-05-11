@@ -307,8 +307,8 @@ img {
   background: #020024;
   background: linear-gradient(
     180deg,
-    /* rgba(2, 0, 36, 1) 0%, */ rgb(210, 214, 203) 35%,
-    rgb(167, 173, 142) 150%
+    /* rgba(2, 0, 36, 1) 0%, */ rgb(230, 234, 220) 35%,
+    rgb(197, 197, 179) 150%
   );
 }
 .sibar-tabs {
@@ -318,8 +318,8 @@ img {
   gap: 4px;
   padding: 4px;
   margin-bottom: 2px;
-  border-radius: 16px;
-  transition: 0.2s;
+  border-radius: 8px;
+  transition: 1.5ms;
 }
 .sibar-tabs:hover {
   color: white;
