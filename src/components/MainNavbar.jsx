@@ -7,12 +7,13 @@ function MainNavbar() {
   return (
     <Navbar>
       <Container className="nav-container">
-        <Navbar.Text>
-          <Link to="/dashboard/aboutpage">About</Link>
-        </Navbar.Text>
         <Navbar.Brand href="/">
           <h2>AroMate</h2>
         </Navbar.Brand>
+        <Navbar.Text>
+          <Link to="/dashboard/aboutpage">About</Link>
+        </Navbar.Text>
+
         <button>have fun</button>
       </Container>
     </Navbar>

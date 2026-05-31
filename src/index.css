@@ -54,7 +54,7 @@ body {
 }
 
 #root {
-  width: 1126px;
+  width: auto;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -70,15 +70,21 @@ h2 {
   font-family: var(--heading);
   font-weight: 500;
   color: var(--text-h);
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 24px 0;
+    line-height: 15px;
+  }
 }
 
 h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
   margin: 32px 0;
-  @media (max-width: 1024px) {
+  @media (max-width: 490px) {
     font-size: 36px;
-    margin: 20px 0;
+    margin: 24px 0;
+    line-height: 15px;
   }
 }
 h2 {
@@ -166,17 +172,16 @@ p {
   min-height: 120vh;
 }
 .about-page {
-  margin-right: 40px;
-  margin-left: 40px;
-  min-height: 100vh;
+  margin-right: 50px;
+  margin-left: 50px;
+  min-height: 100svh;
 }
 
 .hero {
-  margin-top: 30px;
+  margin: 40px 40px 40px 30px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
-  gap: 16px;
   padding: 24px;
 }
 .hero-text {
