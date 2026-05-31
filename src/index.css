@@ -168,7 +168,7 @@ p {
   background-color: #f6f9ef;
   justify-content: center;
   align-items: center;
-  padding: 0px 40px 0px 40px;
+  padding: 30px;
   min-height: 120vh;
 }
 .about-page {
@@ -178,7 +178,7 @@ p {
 }
 
 .hero {
-  margin: 40px 40px 40px 30px;
+  margin: 16px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
