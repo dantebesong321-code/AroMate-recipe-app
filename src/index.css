@@ -80,10 +80,10 @@ h2 {
 h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
-  margin: 32px 0;
+  margin: 0px 0 16px 0;
   @media (max-width: 490px) {
     font-size: 36px;
-    margin: 24px 0;
+    margin: 16px 0;
     line-height: 15px;
   }
 }
@@ -178,11 +178,15 @@ p {
 }
 
 .hero {
-  margin: 16px;
+  margin: 40px 40px 0px 40px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: 24px;
+  padding: 16px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+    margin: 0 16px 0 0;
+  }
 }
 .hero-text {
   display: flex;
