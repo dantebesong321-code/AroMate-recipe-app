@@ -1,19 +1,7 @@
 import { AiOutlineSearch } from "react-icons/ai";
 import { useState } from "react";
 
-function SearchBar({ allRecipes, setFilteredRecipes }) {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = (value) => {
-    setSearchQuery(value);
-
-    const filteredArr = allRecipes.filter((recipe) =>
-      (recipe.title || "").toLowerCase().includes(value.toLowerCase()),
-    );
-
-    setFilteredRecipes(filteredArr);
-  };
-
+function SearchBar({ searchQuery, setSearchQuery }) {
   return (
     <div className="search-bar container">
       <form className="search-box" onSubmit={(e) => e.preventDefault()}>
@@ -21,9 +9,9 @@ function SearchBar({ allRecipes, setFilteredRecipes }) {
           type="text"
           placeholder="Search recipes..."
           value={searchQuery}
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
-      </form>{" "}
+      </form>
     </div>
   );
 }

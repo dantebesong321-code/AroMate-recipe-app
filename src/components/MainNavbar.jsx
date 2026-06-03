@@ -1,22 +1,29 @@
+import { Link, useLocation } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import AboutPage from "../pages/AboutPage";
-import { Link } from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
+import { Sparkles } from "lucide-react";
 
 function MainNavbar() {
-  return (
-    <Navbar>
-      <Container className="nav-container">
-        <Navbar.Brand href="/">
-          <h2>AroMate</h2>
-        </Navbar.Brand>
-        <Navbar.Text>
-          <Link to="/dashboard/aboutpage">About</Link>
-        </Navbar.Text>
+  const location = useLocation();
 
-        <button>have fun</button>
-      </Container>
-    </Navbar>
+  return (
+    <nav className="nav-container">
+      <Link to="/">
+        {" "}
+        <h2 className="brand-logo mb-0">AroMate</h2>
+      </Link>
+
+      <ul>
+        <li>
+          {" "}
+          <Link to="/dashboard/aboutpage"> About</Link>
+        </li>
+        <li>
+          <Link to="/dashboard/recipes"> My Cookbook</Link>
+        </li>
+      </ul>
+    </nav>
   );
 }
 

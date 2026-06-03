@@ -38,7 +38,7 @@ function RecipeCard({ recipe }) {
     : "0";
 
   return (
-    <div className="card">
+    <div>
       <Card
         className="recipe-card"
         style={{

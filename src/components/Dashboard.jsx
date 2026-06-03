@@ -8,7 +8,7 @@ function Dashboard() {
       <div className="side-bar">
         <Sidebar />
       </div>
-      <div className="page-area">
+      <div>
         <Outlet />
       </div>
     </div>
