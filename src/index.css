@@ -530,6 +530,7 @@ li {
 .recipe-cards {
   display: flex;
   gap: 12px;
+  margin-bottom: 32px;
   flex-wrap: wrap;
   min-height: 100svh;
   justify-content: center;
@@ -543,6 +544,10 @@ li {
   background-color: var(--card-bg);
   margin: 24px;
   border-radius: 16px;
+}
+
+.recipe-page-container {
+  min-height: 100svh;
 }
 .recipeDetailsPage {
   display: flex;
