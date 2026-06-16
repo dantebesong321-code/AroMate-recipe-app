@@ -78,57 +78,64 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="features-section">
-        <div className="section-header">
-          <h2>Why Cooks Love Our App</h2>
-          <p>
-            Everything you need to turn mealtime chaos into culinary confidence.
-          </p>
-        </div>
-
-        <div className="features-grid">
-          <div className="feature-card">
-            <div className="feature-icon">
-              <MdSavedSearch color={"green"} size={"50px"} />
-            </div>
-            <h3>Smart Search & Filters</h3>
+      <section className=" rounded-2xl bg-slate-50">
+        <div className="mx-auto px-6">
+          <div className="text-center gallery-text">
+            <h2>Why AroMate</h2>
             <p>
-              Filter by ingredients you already have, dietary restrictions, or
-              prep time to find the perfect meal instantly.
+              Discover recipes, plan meals, and organize your cooking routine in
+              one simple place.
             </p>
           </div>
 
-          <div className="feature-card">
-            <div className="feature-icon">
-              <MdCalendarToday color={"green"} size={"45px"} />
-            </div>
-            <h3>Intuitive Meal Planner</h3>
-            <p>
-              Map out your entire week in minutes. Drag, drop, and organize your
-              breakfast, lunch, and dinner effortlessly.
-            </p>
-          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {/* Card 1 */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center mb-6">
+                <MdSavedSearch className="text-green-600 text-4xl" />
+              </div>
 
-          <div className="feature-card">
-            <div className="feature-icon">
-              <MdListAlt color={"green"} size={"50px"} />
-            </div>
-            <h3>Auto-Generated Grocery Lists</h3>
-            <p>
-              Your meal plan automatically generates a sorted shopping list,
-              saving you time and reducing food waste.
-            </p>
-          </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">
+                Discover Recipes
+              </h3>
 
-          <div className="feature-card">
-            <div className="feature-icon">
-              <MdFormatListNumbered color={"green"} size={"50px"} />
+              <p className="text-slate-600 leading-relaxed">
+                Browse delicious recipes and quickly find meals based on
+                ingredients, cooking time, or dietary preferences.
+              </p>
             </div>
-            <h3>Step-by-Step Cooking Guide</h3>
-            <p>
-              Follow clear, voice-friendly instructions with built-in timers so
-              you never burn a dish again.
-            </p>
+
+            {/* Card 2 */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center mb-6">
+                <MdCalendarToday className="text-green-600 text-4xl" />
+              </div>
+
+              <h3 className="text-xl font-bold text-slate-900 mb-3">
+                Plan Your Week
+              </h3>
+
+              <p className="text-slate-600 leading-relaxed">
+                Organize breakfast, lunch, and dinner in advance and eliminate
+                the daily stress of deciding what to cook.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center mb-6">
+                <MdListAlt className="text-green-600 text-4xl" />
+              </div>
+
+              <h3 className="text-xl font-bold text-slate-900 mb-3">
+                Stay Organized
+              </h3>
+
+              <p className="text-slate-600 leading-relaxed">
+                Keep your favorite recipes, ingredients, and cooking notes
+                neatly organized in your personal digital cookbook.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -207,7 +214,7 @@ function HomePage() {
       </section>
 
       {/* FINAL CALL TO ACTION */}
-      <section className="final-cta-section">
+      <section className=" rounded-2xl final-cta-section">
         <h2>Ready to transform your kitchen?</h2>
         <p>
           Join thousands of home cooks making mealtime simple and delicious

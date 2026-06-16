@@ -1,7 +1,4 @@
-// RecipeCard.jsx
 import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import { useState } from "react";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { MdStar } from "react-icons/md";
@@ -14,7 +11,10 @@ function RecipeCard({ recipe }) {
     getBookmarks().some((r) => r.id === recipe.id),
   );
 
-  const toggleBookmark = () => {
+  const toggleBookmark = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     const current = getBookmarks();
 
     if (isBookmarked) {
@@ -38,92 +38,74 @@ function RecipeCard({ recipe }) {
     : "0";
 
   return (
-    <div>
-      <Card
-        className="recipe-card"
-        style={{
-          width: "15rem",
-          height: "250px",
-          padding: "12px",
-          display: "flex",
-          flexDirection: "column",
-          borderRadius: "16px",
-          textAlign: "left",
-        }}
-      >
-        <div
-          style={{ height: "180px", overflow: "hidden", position: "relative" }}
-        >
-          <Card.Img
-            variant="top"
+    <Link to={`/dashboard/recipes/${recipe.id}`} className="group block">
+      <div className="bg-white border-0 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+        {/* IMAGE */}
+        <div className="relative h-48 w-full overflow-hidden">
+          <img
             src={recipe.image}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "8px",
-            }}
+            alt={recipe.title}
+            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
-          <button
+
+          {/* gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+
+          {/* bookmark */}
+          <div
             onClick={toggleBookmark}
-            style={{
-              position: "absolute",
-              top: "8px",
-              right: "8px",
-              background: "rgba(255,255,255,0.85)",
-              border: "none",
-              borderRadius: "50%",
-              width: "32px",
-              height: "32px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-            }}
+            className="absolute top-3 right-3 bg-white/60 hover:bg-white p-2 rounded-full shadow-md transition"
           >
             {isBookmarked ? (
-              <BsBookmarkFill color="#008840" size={16} />
+              <BsBookmarkFill className="text-green-600" />
             ) : (
-              <BsBookmark color="#7f7f7f" size={16} />
+              <BsBookmark className="text-gray-500" />
             )}
-          </button>
+          </div>
         </div>
 
-        <Card.Body
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "8px",
-            flexGrow: 1,
-          }}
-        >
-          <Card.Title style={{ fontWeight: "bold", fontSize: "19px" }}>
+        {/* CONTENT */}
+        <div className="p-4 space-y-2">
+          <h3 className="text-lg font-bold text-slate-800 line-clamp-1">
             {recipe.title}
-          </Card.Title>
-          <Card.Text style={{ fontSize: "14px" }}>
-            {recipe.description}
-          </Card.Text>
+          </h3>
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              marginBottom: "8px",
-            }}
-          >
-            <MdStar color="#ffc107" size={18} />
-            <span style={{ fontWeight: "bold" }}>{averageRating}</span>
-            <span style={{ color: "#777", fontSize: "13px" }}>
-              ({recipe.reviews?.length || 0} reviews)
+          <p className="text-sm text-slate-500 line-clamp-2">
+            {recipe.description}
+          </p>
+
+          {/* rating */}
+          <div className="flex items-center gap-2 text-sm">
+            <MdStar className="text-yellow-400" size={18} />
+            <span className="font-semibold text-slate-700">
+              {averageRating}
+            </span>
+            <span className="text-slate-400">
+              ({recipe.reviews?.length || 0})
             </span>
           </div>
-          <Link to={`/dashboard/recipes/${recipe.id}`}>
-            <Button variant="primary">See more</Button>
-          </Link>
-        </Card.Body>
-      </Card>
-    </div>
+
+          {/* tags preview */}
+          <div className="flex flex-wrap gap-2 pt-1">
+            {recipe.tags?.slice(0, 2).map((tag) => (
+              <span
+                key={tag}
+                className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="pt-2">
+            <span className="inline-block w-full text-center bg-gray-900 text-white text-sm py-2 rounded-xl group-hover:bg-green-600 transition">
+              See recipe
+            </span>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 }
 

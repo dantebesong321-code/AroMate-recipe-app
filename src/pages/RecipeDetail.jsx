@@ -2,7 +2,6 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
-import StarRate from "../components/StarRate";
 import { MdStar } from "react-icons/md";
 
 import {
@@ -14,15 +13,18 @@ import {
   MessageSquare,
 } from "lucide-react";
 
+import StarRate from "../components/StarRate";
+
 function RecipeDetail() {
   const [recipe, setRecipe] = useState(null);
-  const { recipeId } = useParams();
-  const navigate = useNavigate();
   const [showConfirm, setShowConfirm] = useState(false);
 
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
   const [editingIndex, setEditingIndex] = useState(null);
+
+  const { recipeId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getData();
@@ -30,54 +32,71 @@ function RecipeDetail() {
 
   const getData = async () => {
     try {
-      const response = await axios.get(
+      const res = await axios.get(
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
-      setRecipe(response.data);
-    } catch (error) {
-      console.error(error);
+      setRecipe(res.data);
+    } catch (err) {
+      console.log(err);
     }
   };
 
+  const averageRating =
+    recipe?.reviews?.length > 0
+      ? (
+          recipe.reviews.reduce((acc, r) => acc + Number(r.rating), 0) /
+          recipe.reviews.length
+        ).toFixed(1)
+      : 0;
+
   const handleReviewSubmit = async () => {
     if (!reviewText || !rating) return;
+
     const newReview = {
       user: "Anonymous Cook",
       rating: String(rating),
       comment: reviewText,
     };
-    let updatedReviews =
+
+    const updatedReviews =
       editingIndex !== null
-        ? recipe.reviews.map((rev, i) => (i === editingIndex ? newReview : rev))
+        ? recipe.reviews.map((r, i) => (i === editingIndex ? newReview : r))
         : [...(recipe.reviews || []), newReview];
 
+    const updatedRecipe = {
+      ...recipe,
+      reviews: updatedReviews,
+    };
+
     try {
-      const updatedRecipe = { ...recipe, reviews: updatedReviews };
       await axios.put(
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
         updatedRecipe,
       );
+
       setRecipe(updatedRecipe);
       setReviewText("");
       setRating(0);
       setEditingIndex(null);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   };
 
   const deleteReview = async (index) => {
     const updatedReviews = recipe.reviews.filter((_, i) => i !== index);
-    try {
-      const updatedRecipe = { ...recipe, reviews: updatedReviews };
-      await axios.put(
-        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
-        updatedRecipe,
-      );
-      setRecipe(updatedRecipe);
-    } catch (error) {
-      console.log(error);
-    }
+
+    const updatedRecipe = {
+      ...recipe,
+      reviews: updatedReviews,
+    };
+
+    await axios.put(
+      `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
+      updatedRecipe,
+    );
+
+    setRecipe(updatedRecipe);
   };
 
   const confirmDelete = async () => {
@@ -85,164 +104,232 @@ function RecipeDetail() {
       await axios.delete(
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
-      navigate("/dashboard");
-    } catch (error) {
-      console.log(error);
+      navigate("/dashboard/recipes");
+    } catch (err) {
+      console.log(err);
     }
   };
 
   if (!recipe) {
     return (
-      <div className="loader-container">
-        <Spinner animation="border" className="animated-spinner" />
-        <p className="loading-text">Getting the secret ingredients ready...</p>
+      <div className="flex flex-col items-center justify-center min-h-[70vh]">
+        <Spinner animation="border" />
+        <p className="mt-4 text-slate-500">
+          Getting the secret ingredients ready...
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="page-area recipe-detail-container">
-      {/* HEADER NAVIGATION */}
-      <div className="detail-nav">
-        <button onClick={() => navigate(-1)} className="back-link">
-          <ArrowLeft size={18} /> Back to Gallery
-        </button>
-      </div>
+    <div className="space-y-8">
+      {/* BACK BUTTON */}
+      <button
+        onClick={() => navigate(-1)}
+        className="flex items-center gap-2 text-slate-600 hover:text-slate-900"
+      >
+        <ArrowLeft size={18} />
+        Back
+      </button>
 
-      <div className="recipe-main-content">
-        <div className="recipe-hero-card">
-          <img
-            src={recipe.image}
-            alt={recipe.title}
-            className="detail-hero-img"
-          />
-          <div className="recipe-header-info">
-            <h1>{recipe.title}</h1>
-            <div className="quick-stats">
-              <div className="stat-item">
-                <ChefHat size={20} className="stat-icon" />
-                <span>
-                  <strong>Difficulty:</strong> {recipe.difficulty}
-                </span>
-              </div>
-              <div className="stat-item">
-                <Clock size={20} className="stat-icon" />
-                <span>
-                  <strong>Time:</strong> {recipe.cookingTime} mins
-                </span>
-              </div>
-            </div>
-            <p className="detail-description">{recipe.description}</p>
+      {/* HERO */}
+      <div className="relative rounded-3xl overflow-hidden">
+        <img
+          src={recipe.image}
+          alt={recipe.title}
+          className="w-full h-[380px] object-cover"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+        <div className="absolute bottom-0 p-8 text-white">
+          <h1 className="text-4xl font-bold mb-3">{recipe.title}</h1>
+
+          <div className="flex flex-wrap gap-3 text-sm">
+            <span className="bg-white/20 px-3 py-1 rounded-full">
+              ⏱ {recipe.cookingTime} min
+            </span>
+
+            <span className="bg-white/20 px-3 py-1 rounded-full">
+              👨‍🍳 {recipe.difficulty}
+            </span>
+
+            <span className="bg-white/20 px-3 py-1 rounded-full">
+              ⭐ {averageRating}
+            </span>
           </div>
         </div>
-        <div className="recipe-grid-details">
-          <div className="details-card">
-            <h4>Ingredients</h4>
-            <ul className="styled-list">
-              {Array.isArray(recipe.ingredients) ? (
-                recipe.ingredients.map((ing, i) => <li key={i}>{ing}</li>)
-              ) : (
-                <li>{recipe.ingredients}</li>
-              )}
-            </ul>
-          </div>
+      </div>
 
-          <div className="details-card">
-            <h4>Preparation Steps</h4>
-            <ol className="styled-steps">
-              {Array.isArray(recipe.steps) ? (
-                recipe.steps.map((step, i) => <li key={i}>{step}</li>)
-              ) : (
-                <li>{recipe.steps}</li>
-              )}
-            </ol>
+      {/* TAGS */}
+      <div className="flex flex-wrap gap-2">
+        {recipe.tags?.map((tag) => (
+          <span
+            key={tag}
+            className="bg-green-50 text-green-700 px-4 py-1 rounded-full text-sm"
+          >
+            #{tag}
+          </span>
+        ))}
+      </div>
+
+      {/* GRID */}
+      <div className="grid lg:grid-cols-3 gap-6">
+        {/* ABOUT */}
+        <div className="bg-white border rounded-3xl p-6">
+          <h3 className="text-xl font-bold mb-3">About</h3>
+          <p className="text-slate-600">{recipe.description}</p>
+        </div>
+
+        {/* INGREDIENTS */}
+        <div className="bg-white border rounded-3xl p-6">
+          <h3 className="text-xl font-bold mb-4">Ingredients</h3>
+
+          <ul className="space-y-3">
+            {recipe.ingredients?.map((i, idx) => (
+              <li key={idx} className="flex gap-2 text-slate-700">
+                <span className="text-green-600">✓</span>
+                {i}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* STEPS */}
+        <div className="lg:col-span-2 bg-white border rounded-3xl p-6">
+          <h3 className="text-xl font-bold mb-4">Steps</h3>
+
+          <div className="space-y-4">
+            {recipe.steps?.map((step, i) => (
+              <div key={i} className="flex gap-3">
+                <div className="h-7 w-7 rounded-full bg-green-600 text-white flex items-center justify-center text-sm">
+                  {i + 1}
+                </div>
+                <p className="text-slate-700">{step}</p>
+              </div>
+            ))}
           </div>
-        </div>{" "}
-        <br />
-        <hr className="detail-divider" />
-        {/* REVIEWS SECTION */}
-        <section className="reviews-section">
-          <h3>
-            <MessageSquare size={20} style={{ marginRight: "8px" }} /> Community
+        </div>
+      </div>
+
+      {/* REVIEWS */}
+      <div className="bg-white border rounded-3xl p-6 space-y-6">
+        <div className="flex items-center justify-between">
+          <h3 className="text-2xl font-bold flex items-center gap-2">
+            <MessageSquare size={20} />
             Reviews
           </h3>
-          <div className="add-review-box">
-            <StarRate rating={rating} setRating={setRating} />
-            <textarea
-              value={reviewText}
-              onChange={(e) => setReviewText(e.target.value)}
-              placeholder="How did it taste? Any tips for other cooks?"
-              className="review-textarea"
-            />
-            <button onClick={handleReviewSubmit} className="main-cta-btn">
-              {editingIndex !== null ? "Update My Review" : "Share Review"}
-            </button>
-          </div>
 
-          <div className="reviews-list">
-            {recipe.reviews?.map((review, index) => (
-              <div key={index} className="review-item">
-                <div className="review-header">
-                  <div className="review-stars">
+          <span className="text-sm bg-slate-100 px-3 py-1 rounded-full">
+            {recipe.reviews?.length || 0} reviews
+          </span>
+        </div>
+
+        {/* ADD REVIEW */}
+        <div className="space-y-3">
+          <StarRate rating={rating} setRating={setRating} />
+
+          <textarea
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
+            placeholder="Write your review..."
+            className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-green-200"
+          />
+
+          <button
+            onClick={handleReviewSubmit}
+            className="bg-green-600 text-white px-5 py-2 rounded-xl hover:bg-green-700"
+          >
+            {editingIndex !== null ? "Update Review" : "Submit Review"}
+          </button>
+        </div>
+
+        {/* REVIEW LIST */}
+        <div className="space-y-4">
+          {recipe.reviews?.map((review, index) => (
+            <div key={index} className="border rounded-2xl p-4">
+              <div className="flex justify-between">
+                <div>
+                  <h4 className="font-semibold">{review.user}</h4>
+
+                  <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <MdStar
                         key={i}
+                        size={18}
                         color={
-                          i < Number(review.rating) ? "#ffc107" : "#e2e8f0"
+                          i < Number(review.rating) ? "#facc15" : "#cbd5e1"
                         }
                       />
                     ))}
                   </div>
-                  <span className="review-user">{review.user}</span>
                 </div>
-                <p>{review.comment}</p>
-                <div className="review-actions">
-                  <button onClick={() => setEditingIndex(index)}>Edit</button>
+
+                <div className="flex gap-3 text-sm">
+                  <button
+                    onClick={() => {
+                      setReviewText(review.comment);
+                      setRating(Number(review.rating));
+                      setEditingIndex(index);
+                    }}
+                    className="text-green-600"
+                  >
+                    Edit
+                  </button>
+
                   <button
                     onClick={() => deleteReview(index)}
-                    className="delete-text"
+                    className="text-red-500"
                   >
                     Delete
                   </button>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
-        {/* PAGE ACTIONS */}
-        <div className="detail-footer-actions">
-          <Link to={`/dashboard/recipes/edit/${recipeId}`}>
-            <button className="secondary-cta-btn">
-              <Edit3 size={16} /> Edit Recipe
-            </button>
-          </Link>
-          <button
-            className="main-delete-btn"
-            onClick={() => setShowConfirm(true)}
-          >
-            <Trash2 size={16} /> Delete Recipe
-          </button>
+
+              <p className="mt-2 text-slate-600">{review.comment}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* CONFIRMATION MODAL */}
+      {/* ACTIONS */}
+      <div className="flex gap-4">
+        <Link to={`/dashboard/recipes/edit/${recipeId}`}>
+          <button className="bg-slate-900 text-white px-6 py-3 rounded-xl flex items-center gap-2">
+            <Edit3 size={16} />
+            Edit
+          </button>
+        </Link>
+
+        <button
+          onClick={() => setShowConfirm(true)}
+          className="bg-red-500 text-white px-6 py-3 rounded-xl flex items-center gap-2"
+        >
+          <Trash2 size={16} />
+          Delete
+        </button>
+      </div>
+
+      {/* MODAL */}
       {showConfirm && (
-        <div className="modal-overlay">
-          <div className="modal-box">
-            <h3>Delete this recipe?</h3>
-            <p>
-              This will permanently remove <strong>{recipe.title}</strong> from
-              your collection.
-            </p>
-            <div className="modal-actions">
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-2xl w-[90%] max-w-md">
+            <h3 className="text-lg font-bold">Delete recipe?</h3>
+            <p className="text-slate-600 mt-2">This action cannot be undone.</p>
+
+            <div className="flex justify-end gap-3 mt-5">
               <button
-                className="cancel-btn"
                 onClick={() => setShowConfirm(false)}
+                className="px-4 py-2"
               >
-                Keep it
+                Cancel
               </button>
-              <button className="confirm-delete-btn" onClick={confirmDelete}>
-                Yes, Delete
+
+              <button
+                onClick={confirmDelete}
+                className="bg-red-500 text-white px-4 py-2 rounded-xl"
+              >
+                Delete
               </button>
             </div>
           </div>
