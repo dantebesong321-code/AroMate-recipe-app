@@ -47,7 +47,7 @@ function Sidebar() {
 
   return (
     <aside
-      className={`sidebar
+      className={`max-md:hidden
         h-screen
         sticky
         top-0

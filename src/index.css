@@ -114,11 +114,6 @@ li {
     font-size: 32px;
   }
 }
-@media (max-width: 680px) {
-  .sidebar {
-    display: "none";
-  }
-}
 
 .nav-container {
   position: sticky;
