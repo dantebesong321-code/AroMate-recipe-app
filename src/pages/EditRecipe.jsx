@@ -228,20 +228,20 @@ function EditRecipe() {
 
               {/* BUTTONS */}
               <div className="flex flex-col sm:flex-row justify-end gap-4">
-                <button
+                <div
                   type="button"
                   onClick={() => setShowConfirm(true)}
                   className="px-6 py-3 rounded-xl border border-red-200 text-red-600 hover:bg-red-50 transition"
                 >
                   Delete Recipe
-                </button>
+                </div>
 
-                <button
+                <div
                   type="submit"
                   className="px-8 py-3 rounded-xl bg-green-600 text-white font-medium hover:bg-green-700 transition"
                 >
                   Save Changes
-                </button>
+                </div>
               </div>
             </form>
           </div>
@@ -259,19 +259,19 @@ function EditRecipe() {
             <p className="text-slate-600 mb-6">This action cannot be undone.</p>
 
             <div className="flex justify-end gap-3">
-              <button
+              <div
                 onClick={() => setShowConfirm(false)}
                 className="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100"
               >
                 Cancel
-              </button>
+              </div>
 
-              <button
+              <div
                 onClick={confirmDelete}
                 className="px-5 py-2.5 rounded-xl bg-red-600 text-white hover:bg-red-700"
               >
                 Delete
-              </button>
+              </div>
             </div>
           </div>
         </div>

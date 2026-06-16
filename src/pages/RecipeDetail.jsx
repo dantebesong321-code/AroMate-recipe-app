@@ -295,19 +295,19 @@ function RecipeDetail() {
       {/* ACTIONS */}
       <div className="flex gap-4">
         <Link to={`/dashboard/recipes/edit/${recipeId}`}>
-          <button className="bg-slate-900 text-white px-6 py-3 rounded-xl flex items-center gap-2">
+          <div className="bg-slate-900 text-white px-6 py-3 rounded-xl flex items-center gap-2">
             <Edit3 size={16} />
             Edit
-          </button>
+          </div>
         </Link>
 
-        <button
+        <div
           onClick={() => setShowConfirm(true)}
-          className="bg-red-500 text-white px-6 py-3 rounded-xl flex items-center gap-2"
+          className="border-1 border-red-500 text-red-600 hover:bg-red-200  pointer px-6 py-3 rounded-xl flex items-center gap-2"
         >
           <Trash2 size={16} />
           Delete
-        </button>
+        </div>
       </div>
 
       {/* MODAL */}
@@ -318,19 +318,16 @@ function RecipeDetail() {
             <p className="text-slate-600 mt-2">This action cannot be undone.</p>
 
             <div className="flex justify-end gap-3 mt-5">
-              <button
-                onClick={() => setShowConfirm(false)}
-                className="px-4 py-2"
-              >
+              <div onClick={() => setShowConfirm(false)} className="px-4 py-2">
                 Cancel
-              </button>
+              </div>
 
-              <button
+              <div
                 onClick={confirmDelete}
-                className="bg-red-500 text-white px-4 py-2 rounded-xl"
+                className="border-red-500 text-red-500 px-4 py-2 rounded-xl"
               >
                 Delete
-              </button>
+              </div>
             </div>
           </div>
         </div>
