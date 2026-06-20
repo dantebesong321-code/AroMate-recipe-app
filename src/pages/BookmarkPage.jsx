@@ -23,8 +23,7 @@ function BookmarkPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] p-4">
-      <h2 className="text-2xl font-bold mb-6">My Bookmarked Recipes</h2>
-
+      <h1 className="text-2xl font-bold mb-8">My Bookmarked Recipes</h1> <br />
       {bookmarkedRecipes.length === 0 ? (
         <p className="text-gray-500 text-center">No bookmarked recipes yet.</p>
       ) : (
