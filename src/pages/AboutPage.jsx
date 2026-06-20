@@ -11,7 +11,7 @@ function AboutPage() {
           alt="AroMate culinary layout"
         />
         {/* Subtle overlay to give the image depth */}
-        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute rounded-2xl inset-0 bg-black/10" />
       </div>
 
       {/* Content Container */}
@@ -36,7 +36,8 @@ function AboutPage() {
               traditions, AroMate provides a seamless environment to discover,
               create, manage, and bookmark delicious recipes all in one central
               workspace.
-            </p>
+            </p>{" "}
+            <br />
             <p>
               Built with a clean, intuitive visual hierarchy and optimized for
               speed, we believe that cooking inspiration should be entirely

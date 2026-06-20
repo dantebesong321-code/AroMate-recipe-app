@@ -17,7 +17,7 @@ function MainNavbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-gray-900 backdrop-blur-md border-b">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="pl-5 pr-5 mx-auto px-2">
         <div className="flex items-center justify-between h-20">
           {/* LOGO */}
           <Link
@@ -126,6 +126,14 @@ function MainNavbar() {
                 className="py-2 text-slate-700"
               >
                 My Cookbook
+              </Link>
+
+              <Link
+                to="/dashboard/bookmarks"
+                onClick={() => setMobileOpen(false)}
+                className="py-2 text-slate-700"
+              >
+                Favorites
               </Link>
 
               <Link
