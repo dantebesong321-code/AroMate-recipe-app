@@ -107,7 +107,7 @@ function MainNavbar() {
               <Link
                 to="/"
                 onClick={() => setMobileOpen(false)}
-                className="py-2 text-slate-700"
+                className="text-center py-2 text-slate-700 hover:bg-slate-100"
               >
                 Home
               </Link>
@@ -115,7 +115,7 @@ function MainNavbar() {
               <Link
                 to="/dashboard/aboutpage"
                 onClick={() => setMobileOpen(false)}
-                className="py-2 text-slate-700"
+                className="text-center py-2 text-slate-700 hover:bg-slate-100"
               >
                 About
               </Link>
@@ -123,7 +123,7 @@ function MainNavbar() {
               <Link
                 to="/dashboard/recipes"
                 onClick={() => setMobileOpen(false)}
-                className="py-2 text-slate-700"
+                className="text-center py-2 text-slate-700 hover:bg-slate-100"
               >
                 My Cookbook
               </Link>
@@ -131,7 +131,7 @@ function MainNavbar() {
               <Link
                 to="/dashboard/bookmarks"
                 onClick={() => setMobileOpen(false)}
-                className="py-2 text-slate-700"
+                className="text-center py-2 text-slate-700 hover:bg-slate-100"
               >
                 Favorites
               </Link>
@@ -139,7 +139,7 @@ function MainNavbar() {
               <Link
                 to="/dashboard/recipes/create"
                 onClick={() => setMobileOpen(false)}
-                className="py-2 text-slate-700"
+                className="text-center py-2 text-slate-700 hover:bg-slate-100"
               >
                 Create Recipe
               </Link>
