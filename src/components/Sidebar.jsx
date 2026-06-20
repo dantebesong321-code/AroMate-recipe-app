@@ -66,8 +66,7 @@ function Sidebar() {
         <div className="flex items-center gap-3 overflow-hidden">
           {!isCollapsed && (
             <div>
-              <h2 className="font-bold text-xl text-slate-900">AroMate</h2>
-              <p className="text-xs text-slate-500">Your Cooking Companion</p>
+              <h2 className="text-xs text-slate-500">Your Cooking Companion</h2>
             </div>
           )}
         </div>
@@ -149,7 +148,7 @@ function Sidebar() {
             </p>
           </div>
         ) : (
-          <div className="flex justify-center text-xl">🍳</div>
+          <div className="flex justify-center text-xl"></div>
         )}
       </div>
     </aside>

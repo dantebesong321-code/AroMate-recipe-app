@@ -36,6 +36,7 @@ function RecipeDetail() {
       const res = await axios.get(
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
+      console.log(res);
 
       // cleaning of STEPS bullets points before rendering
       const rawRecipe = res.data;
@@ -247,7 +248,7 @@ function RecipeDetail() {
 
           <div
             onClick={handleReviewSubmit}
-            className="bg-green-600 text-white xl:max-w-md text-center px-5 py-2 rounded-xl hover:bg-green-700"
+            className="bg-green-600  text-white xl:max-w-md text-center px-5 py-2 rounded-xl hover:bg-green-700"
           >
             {editingIndex !== null ? "Update Review" : "Submit Review"}
           </div>
