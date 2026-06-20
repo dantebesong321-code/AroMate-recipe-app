@@ -22,20 +22,22 @@ function BookmarkPage() {
   };
 
   return (
-    <div className="bookmar-list">
+    <div className="flex flex-col items-center justify-center min-h-[70vh]">
       <h2>My Bookmarked Recipes</h2> <br />
-      <div className="recipe-cards">
-        {bookmarkedRecipes.length === 0 ? (
-          <p>No bookmarked recipes yet.</p>
-        ) : (
-          bookmarkedRecipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              removeFromBookmarks={removeFromBookmarks}
-            />
-          ))
-        )}
+      <div className="flex gap-6">
+        <div className="grid gab-6 sm:grid-cols-2 xl:grid-cols-3">
+          {bookmarkedRecipes.length === 0 ? (
+            <p>No bookmarked recipes yet.</p>
+          ) : (
+            bookmarkedRecipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                removeFromBookmarks={removeFromBookmarks}
+              />
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

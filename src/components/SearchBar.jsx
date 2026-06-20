@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 
 function SearchBar({ searchQuery, setSearchQuery }) {
   return (
-    <div className="relative rounded-3xl">
+    <div className="relative rounded-full">
       <Search
         size={18}
         className="
@@ -24,7 +24,7 @@ function SearchBar({ searchQuery, setSearchQuery }) {
           pl-11
           pr-4
           py-3
-          rounded-xl
+          rounded-full
           border
           border-slate-200
           focus:outline-none

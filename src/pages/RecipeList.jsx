@@ -69,12 +69,12 @@ function RecipeList() {
 
         <p className="text-slate-500 mt-2">We couldn't load the recipes.</p>
 
-        <button
+        <div
           onClick={getData}
           className="
             mt-6
-            bg-green-600
-            hover:bg-green-700
+            bg-slate-500
+            hover:bg-slate-800
             text-white
             px-6
             py-3
@@ -83,7 +83,7 @@ function RecipeList() {
           "
         >
           Try Again
-        </button>
+        </div>
       </div>
     );
   }

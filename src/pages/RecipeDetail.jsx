@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import { MdStar } from "react-icons/md";
+import { FiClock, FiStar, FiAward, FiEdit3 } from "react-icons/fi";
 
 import {
   Clock,
@@ -35,6 +36,18 @@ function RecipeDetail() {
       const res = await axios.get(
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
+
+      // cleaning of STEPS bullets points before rendering
+      const rawRecipe = res.data;
+      if (rawRecipe.steps && Array.isArray(rawRecipe.steps)) {
+        // Regex matches bullet characters (•, *, -) and any leading/trailing spaces at the start of the line
+        const bulletRegex = /^[•*\-\s]+/;
+
+        rawRecipe.steps = rawRecipe.steps.map((step) =>
+          typeof step === "string" ? step.replace(bulletRegex, "") : step,
+        );
+      }
+
       setRecipe(res.data);
     } catch (err) {
       console.log(err);
@@ -124,13 +137,6 @@ function RecipeDetail() {
   return (
     <div className="space-y-8">
       {/* BACK BUTTON */}
-      <button
-        onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-slate-600 hover:text-slate-900"
-      >
-        <ArrowLeft size={18} />
-        Back
-      </button>
 
       {/* HERO */}
       <div className="relative rounded-3xl overflow-hidden">
@@ -143,19 +149,19 @@ function RecipeDetail() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
         <div className="absolute bottom-0 p-8 text-white">
-          <h1 className="text-4xl font-bold mb-3">{recipe.title}</h1>
+          <h3 className="text-4xl font-bold text-white mb-3">{recipe.title}</h3>
 
           <div className="flex flex-wrap gap-3 text-sm">
-            <span className="bg-white/20 px-3 py-1 rounded-full">
-              ⏱ {recipe.cookingTime} min
+            <span className="bg-white/20 flex gap-1.5 justify-between px-3 py-1 rounded-full">
+              <FiClock size={20} /> {recipe.cookingTime} min
             </span>
 
-            <span className="bg-white/20 px-3 py-1 rounded-full">
-              👨‍🍳 {recipe.difficulty}
+            <span className="bg-white/20 flex gap-1.5 justify-between px-3 py-1 rounded-full">
+              <FiAward size={20} /> {recipe.difficulty}
             </span>
 
-            <span className="bg-white/20 px-3 py-1 rounded-full">
-              ⭐ {averageRating}
+            <span className="bg-white/20 flex gap-1.5 justify-between px-3 py-1 rounded-full">
+              <FiStar size={20} /> {averageRating}
             </span>
           </div>
         </div>
@@ -176,19 +182,18 @@ function RecipeDetail() {
       {/* GRID */}
       <div className="grid lg:grid-cols-3 gap-6">
         {/* ABOUT */}
-        <div className="bg-white border rounded-3xl p-6">
+        <div className="bg-white border border-slate-300 rounded-3xl p-6">
           <h3 className="text-xl font-bold mb-3">About</h3>
           <p className="text-slate-600">{recipe.description}</p>
         </div>
 
         {/* INGREDIENTS */}
-        <div className="bg-white border rounded-3xl p-6">
+        <div className="bg-white border border-slate-300 rounded-3xl p-6">
           <h3 className="text-xl font-bold mb-4">Ingredients</h3>
 
           <ul className="space-y-3">
             {recipe.ingredients?.map((i, idx) => (
-              <li key={idx} className="flex gap-2 text-slate-700">
-                <span className="text-green-600">✓</span>
+              <li key={idx} className="flex gap-2  text-slate-700">
                 {i}
               </li>
             ))}
@@ -196,24 +201,28 @@ function RecipeDetail() {
         </div>
 
         {/* STEPS */}
-        <div className="lg:col-span-2 bg-white border rounded-3xl p-6">
+        <div className="lg:col-span-2 bg-white border border-slate-300 rounded-3xl p-6">
           <h3 className="text-xl font-bold mb-4">Steps</h3>
 
-          <div className="space-y-4">
-            {recipe.steps?.map((step, i) => (
-              <div key={i} className="flex gap-3">
-                <div className="h-7 w-7 rounded-full bg-green-600 text-white flex items-center justify-center text-sm">
-                  {i + 1}
+          {recipe.steps && recipe.steps.length > 0 ? (
+            <div className="space-y-4">
+              {recipe.steps.map((step, i) => (
+                <div key={`step-${i}`} className="flex gap-3">
+                  <span className="font-bold text-slate-700">{i + 1}.</span>
+                  <p className="text-slate-700">{step}</p>
                 </div>
-                <p className="text-slate-700">{step}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-slate-400 italic">
+              No steps provided for this recipe.
+            </p>
+          )}
         </div>
       </div>
 
       {/* REVIEWS */}
-      <div className="bg-white border rounded-3xl p-6 space-y-6">
+      <div className="bg-white border border-slate-300 rounded-3xl p-6 space-y-6">
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-bold flex items-center gap-2">
             <MessageSquare size={20} />
@@ -233,21 +242,24 @@ function RecipeDetail() {
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
             placeholder="Write your review..."
-            className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-green-200"
+            className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-green-200"
           />
 
-          <button
+          <div
             onClick={handleReviewSubmit}
-            className="bg-green-600 text-white px-5 py-2 rounded-xl hover:bg-green-700"
+            className="bg-green-600 text-white xl:max-w-md text-center px-5 py-2 rounded-xl hover:bg-green-700"
           >
             {editingIndex !== null ? "Update Review" : "Submit Review"}
-          </button>
+          </div>
         </div>
 
         {/* REVIEW LIST */}
         <div className="space-y-4">
           {recipe.reviews?.map((review, index) => (
-            <div key={index} className="border rounded-2xl p-4">
+            <div
+              key={index}
+              className="border border-slate-300 rounded-2xl p-4"
+            >
               <div className="flex justify-between">
                 <div>
                   <h4 className="font-semibold">{review.user}</h4>
@@ -266,23 +278,24 @@ function RecipeDetail() {
                 </div>
 
                 <div className="flex gap-3 text-sm">
-                  <button
+                  <div
                     onClick={() => {
                       setReviewText(review.comment);
                       setRating(Number(review.rating));
                       setEditingIndex(index);
                     }}
-                    className="text-green-600"
+                    className="flex justify-center items-center text-sm bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded-full"
                   >
-                    Edit
-                  </button>
+                    {" "}
+                    <Edit3 size={16} />
+                  </div>
 
-                  <button
+                  <div
                     onClick={() => deleteReview(index)}
-                    className="text-red-500"
+                    className="flex justify-center items-center text-sm bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded-full"
                   >
-                    Delete
-                  </button>
+                    <Trash2 size={16} />
+                  </div>
                 </div>
               </div>
 
@@ -293,9 +306,9 @@ function RecipeDetail() {
       </div>
 
       {/* ACTIONS */}
-      <div className="flex gap-4">
+      <div className="flex justify-between">
         <Link to={`/dashboard/recipes/edit/${recipeId}`}>
-          <div className="bg-slate-900 text-white px-6 py-3 rounded-xl flex items-center gap-2">
+          <div className="bg-slate-100 hover:bg-slate-200 text-slate-600  px-6 py-3 rounded-full h-10 flex items-center gap-2">
             <Edit3 size={16} />
             Edit
           </div>
@@ -303,7 +316,7 @@ function RecipeDetail() {
 
         <div
           onClick={() => setShowConfirm(true)}
-          className="border-1 border-red-500 text-red-600 hover:bg-red-200  pointer px-6 py-3 rounded-xl flex items-center gap-2"
+          className="bg-slate-100 hover:bg-slate-200 text-slate-600  pointer px-6 py-3 rounded-full h-10 flex items-center gap-2"
         >
           <Trash2 size={16} />
           Delete
@@ -312,19 +325,22 @@ function RecipeDetail() {
 
       {/* MODAL */}
       {showConfirm && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
+        <div className="text-center fixed inset-0 bg-black/80 flex items-center justify-center">
           <div className="bg-white p-6 rounded-2xl w-[90%] max-w-md">
             <h3 className="text-lg font-bold">Delete recipe?</h3>
             <p className="text-slate-600 mt-2">This action cannot be undone.</p>
 
-            <div className="flex justify-end gap-3 mt-5">
-              <div onClick={() => setShowConfirm(false)} className="px-4 py-2">
+            <div className="flex justify-center text-xs gap-3 mt-5">
+              <div
+                onClick={() => setShowConfirm(false)}
+                className=" border border-slate-200 px-4 py-2 hover:bg-slate-100 rounded-2xl"
+              >
                 Cancel
               </div>
 
               <div
                 onClick={confirmDelete}
-                className="border-red-500 text-red-500 px-4 py-2 rounded-xl"
+                className=" border border-red-200 text-red-500 px-4 py-2 hover:bg-red-100 rounded-2xl"
               >
                 Delete
               </div>

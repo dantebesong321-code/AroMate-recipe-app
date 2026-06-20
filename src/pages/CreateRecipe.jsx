@@ -187,7 +187,7 @@ function CreateRecipe() {
 
               <div className="flex flex-wrap gap-3">
                 {availableTags.map((tag) => (
-                  <button
+                  <div
                     key={tag}
                     type="button"
                     onClick={() => handleTagToggle(tag)}
@@ -198,7 +198,7 @@ function CreateRecipe() {
                     }`}
                   >
                     {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                  </button>
+                  </div>
                 ))}
               </div>
             </div>
@@ -235,12 +235,12 @@ function CreateRecipe() {
 
             {/* BUTTONS */}
             <div className="flex justify-end">
-              <button
+              <div
                 type="submit"
                 className="px-8 py-3 rounded-xl bg-green-600 text-white font-medium hover:bg-green-700 transition"
               >
                 Create Recipe
-              </button>
+              </div>
             </div>
           </form>
         </div>
